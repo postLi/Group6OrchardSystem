@@ -9,10 +9,11 @@ import {MenuItem} from 'primeng/api';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+    isCollapsed = false;
+    constructor() { }
+    ngOnInit() {
+    }
 
 }
+
+
