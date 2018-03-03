@@ -1,0 +1,38 @@
+{
+    "api":"getUser",
+    "cols":"username,password,date,nickname,email",
+    "filterCols":"id,address,password",
+    "dictionary":{
+        "en":{
+            "email":"E-mail",
+            "nickname":"Nick Name"
+        },
+        "cn":{
+            "date":"注册时间",
+            "email":"邮箱",
+            "nickname":"昵称"
+        }
+    },
+    "multiple":"true",
+    "filterData":{
+        "date":{
+            "type":"DateFormat",
+            "format":"yyyy年MM月dd日 hh:mm:ss"
+        },
+        "username":{
+            "type":"Replace",
+            "reg":"(\\d{3}).+(\\d{4})",
+            "replaceVal":"$1****$2"
+        },
+        "nickname":{
+            "type":"Replace",
+            "reg":"(.).+",
+            "replaceVal":"$1**"
+        },
+        "email":{
+            "type":"Replace",
+            "reg":"qq",
+            "replaceVal":"163"
+        }
+    }
+}

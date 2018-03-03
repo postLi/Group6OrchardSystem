@@ -1,0 +1,21 @@
+{
+    "en":{
+        "title":"Tittle",
+        "saleqty":"Saleqty",
+        "color":"Color",
+        "qty":"Qty",
+        "date":"Date",
+        "username":"User Name",
+        "password":"Password"
+    },
+    "cn":{
+        "title":"名称",
+        "saleqty":"销量",
+        "color":"颜色",
+        "qty":"数量",
+        "date":"创建日期",
+        "username":"用户名",
+        "password":"密码"
+    }
+    
+}
