@@ -9,10 +9,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {HttpService} from './orchard/utils/http.service';
 
+import {RangePipe} from './orchard/utils/range.pipe';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './orchard/components/home/home.component';
 import { HeightlineDirective } from './orchard/directives/heightline.directive';
-import { DatagridComponent } from './orchard/components/datagrid/datagrid.component';
+import { DataGridComponent } from './orchard/components/datagrid/datagrid.component';
 import { RegComponent } from './orchard/components/reg/reg.component';
 import { LoginComponent } from './orchard/components/login/login.component';
 
@@ -24,9 +25,10 @@ import { LoginComponent } from './orchard/components/login/login.component';
     AppComponent,
     HomeComponent,
     HeightlineDirective,
-    DatagridComponent,
+    DataGridComponent,
     RegComponent,
-    LoginComponent
+    LoginComponent,
+    RangePipe
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,6 @@ import { LoginComponent } from './orchard/components/login/login.component';
     ReactiveFormsModule
   ],
   providers: [HttpService],
-  bootstrap: [LoginComponent]
+  bootstrap: [HomeComponent]
 })
 export class AppModule { }
