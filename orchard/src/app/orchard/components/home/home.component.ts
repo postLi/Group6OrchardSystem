@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {MenuItem} from 'primeng/api';
 
@@ -10,8 +10,13 @@ import {MenuItem} from 'primeng/api';
 })
 export class HomeComponent implements OnInit {
     isCollapsed = false;
-    constructor() { }
+   
+    constructor(private router: Router) { }
     ngOnInit() {
+    }
+    exit(){
+        console.log(this.router.navigate)
+        this.router.navigate(["login"]);
     }
 
 }

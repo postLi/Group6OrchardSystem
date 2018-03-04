@@ -4,8 +4,8 @@ var bp = require('body-parser');
 var app = express();
 
 
-
-var list = require('./list')
+var user = require('./user');
+var list = require('./list');
 
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -27,6 +27,7 @@ module.exports = {
 
         //冯志伟
         list.register(app);
+        user.register(app);
         app.listen(_port,function(){
             console.log('连接成功')
         });

@@ -5,11 +5,18 @@ import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {RootRouter} from "./orchard/router/router";
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import {HttpService} from './orchard/utils/http.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './orchard/components/home/home.component';
 import { HeightlineDirective } from './orchard/directives/heightline.directive';
 import { DatagridComponent } from './orchard/components/datagrid/datagrid.component';
+import { RegComponent } from './orchard/components/reg/reg.component';
+import { LoginComponent } from './orchard/components/login/login.component';
+
+
 
 
 @NgModule({
@@ -17,7 +24,9 @@ import { DatagridComponent } from './orchard/components/datagrid/datagrid.compon
     AppComponent,
     HomeComponent,
     HeightlineDirective,
-    DatagridComponent
+    DatagridComponent,
+    RegComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -25,9 +34,10 @@ import { DatagridComponent } from './orchard/components/datagrid/datagrid.compon
     HttpModule,
     RootRouter,
     BrowserAnimationsModule,
-    NgZorroAntdModule.forRoot()
+    NgZorroAntdModule.forRoot(),
+    ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: [HomeComponent]
+  providers: [HttpService],
+  bootstrap: [LoginComponent]
 })
 export class AppModule { }

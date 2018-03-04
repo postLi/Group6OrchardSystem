@@ -1,22 +1,22 @@
-import {Http, RequestOptions, RequestMethod} from '@angular/http'
-import {Injectable} from '@angular/core';
+import {RequestMethod, RequestOptions} from '@angular/http';
 
-@Injectable()
-export class HttpService{
-    constructor(private http: Http){}
+let baseUrl = 'http://localhost:88/';
 
-    private baseUrl:string = 'http://localhost:88/';
-    private getUrl(_url){
-        if(_url.startsWith('http')){
-            return _url;
-        }
-        return this.baseUrl + _url;
+function getUrl(_url){
+    if(_url.startsWith('http')){
+        return _url;
     }
+    return baseUrl + _url;
+}
 
-    get(api, params = {}){
+export default {
+    get: (http, api, params = {}) => {
         return new Promise((resolve, reject) => {
+            // http.get(getUrl(api)).subscribe((res) => {
+            //     resolve(res.json());
+            // })
             params['_'] = Math.random();
-            this.http.get(this.getUrl(api), new RequestOptions({
+            http.request(getUrl(api), new RequestOptions({
                 method: RequestMethod.Get,
                 search: params
             })).toPromise().then((res) => {
