@@ -1,15 +1,16 @@
 {
     "api":"getAll",
-    "cols":"id,title,saleqty,mainimg,color,qty,date",
-    "filterCols":"id,mainimg",
+    "cols":"*",
+    "filterCols":"id,bigtypeid,smalltypeid,detailsimg,mainimg,hot",
     "dictionary":{
         "en":{},
         "cn":{
             "date":"入学时间"
         }
     },
+    "multiple":"true",
     "pagination":{
-        "pageitems":10
+        "pageitems":15
     },
     "filterData":{
         "date":{

@@ -23,7 +23,7 @@ export class DataGridComponent implements OnInit{
     paginationConfig: Object;
     apiConfig: string;
     searchConfig: Object = {};
-    
+    rowsCount:number;
 
     @Input() config: string;
 
@@ -32,6 +32,7 @@ export class DataGridComponent implements OnInit{
     ngOnInit(){
         //获取当前模块的配置
         $.get(this.http, this.config).then((configRes) => {
+
             let cols = configRes['cols'];
             this.columns = !cols || cols == '*' ? [] : cols.split(',');
 
@@ -42,6 +43,7 @@ export class DataGridComponent implements OnInit{
             this.privateDic = dic || {};
 
             this.multiple = configRes['multiple'];
+            console.log(this.multiple,configRes)
 
             this.filterDataConfig = configRes['filterData'] || {};
 
@@ -64,10 +66,14 @@ export class DataGridComponent implements OnInit{
         }        
         //配置信息中的 api
         $.get(this.http, this.apiConfig, pageParams).then((apiRes) => {
-            this.dataset = apiRes['data'];
-            let rowsCount = apiRes['rowsCount'];
+            
+            this.dataset = apiRes['data'].results[0];
+            this.rowsCount = apiRes['data'].results[1][0].rowscount;
+            console.log(apiRes['data'].results[1])
             let pageItems = this.paginationConfig['pageitems'];
-            this.pageCount = Math.ceil(rowsCount / pageItems);
+
+            this.pageCount = Math.ceil(this.rowsCount / pageItems);
+            console.log(this.pageCount,pageItems)
         })
     }
 
@@ -111,7 +117,18 @@ export class DataGridComponent implements OnInit{
     }
 
     goto(event){
-        let _page = event.target.value;
+        // console.log(event.target.ant-pagination-item-active)
+        // let _page = event.target.innerText;
+        var _page;
+        // console.log(isNaN(event.target.innerText));
+        var len = event.path[2].children;
+        for(var i=0;i<len.length;i++){
+            // console.log(len[i].className)
+            if(len[i].className =='ant-pagination-item ant-pagination-item-active ng-star-inserted'){
+                _page = len[i].innerText
+            }
+        }
         this.apiRequest(_page);
+
     }
 }

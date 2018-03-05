@@ -1,8 +1,20 @@
 :host ::ng-deep .logo {
-  	height: 32px;
-  	background: #333;
-  	border-radius: 6px;
-  	margin: 16px;
+  	height: 40px;
+  	background-color: #10a2e9;
+  	border-radius: 1px;
+    width:100%;
+    line-height:40px;
+    font-size:20px;
+    text-align:center;
+    color:#fff;
+}
+:host ::ng-deep .logo_img {
+    height: 200px;
+    background-color: #10a2e9;
+    border-radius: 50%;
+ 
+    
+   
 }
 
 :host ::ng-deep .ant-layout-sider-collapsed .nav-text {
@@ -11,6 +23,7 @@
 
 :host ::ng-deep .ant-layout-sider-collapsed .ant-menu-submenu-title:after {
   	display: none;
+    
 }
 
 :host ::ng-deep .ant-layout-sider-collapsed .anticon {
@@ -19,11 +32,15 @@
 }
 
 :host ::ng-deep .trigger {
-  	font-size: 18px;
+  font-size: 18px;
   line-height: 64px;
   padding: 0 16px;
   cursor: pointer;
   transition: color .3s;
+}
+.ant-menu-dark{
+  background-color: rgba(63, 81, 181, 0.57);
+  color:#fff;
 }
 
 :host ::ng-deep .trigger:hover {
@@ -33,6 +50,6 @@
 	height:100%;
 }
 .ant-layout-sider{
-	background-color: rgba(0, 150, 136, 0.75);
+	background-color: #1190d6;
 	
 }

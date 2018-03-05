@@ -8,6 +8,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {HttpService} from './orchard/utils/http.service';
+import {CommonService} from './orchard/utils/common.service'
 
 import {RangePipe} from './orchard/utils/range.pipe';
 import { AppComponent } from './app.component';
@@ -16,8 +17,8 @@ import { HeightlineDirective } from './orchard/directives/heightline.directive';
 import { DataGridComponent } from './orchard/components/datagrid/datagrid.component';
 import { RegComponent } from './orchard/components/reg/reg.component';
 import { LoginComponent } from './orchard/components/login/login.component';
-
-
+import { AllgoodsComponent } from './orchard/components/allgoods/allgoods.component';
+import { LianxiComponent } from './orchard/components/lianxi/lianxi.component';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import { LoginComponent } from './orchard/components/login/login.component';
     DataGridComponent,
     RegComponent,
     LoginComponent,
-    RangePipe
+    RangePipe,
+    AllgoodsComponent,
+    LianxiComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,7 @@ import { LoginComponent } from './orchard/components/login/login.component';
     NgZorroAntdModule.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [HttpService],
+  providers: [HttpService,CommonService],
   bootstrap: [HomeComponent]
 })
 export class AppModule { }
