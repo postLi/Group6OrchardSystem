@@ -76,7 +76,6 @@ module.exports = {
         app.get('/getAll',function(req, res){
             let pageItems = req.query.pageitems;
             let page = req.query.page;
-            console.log(pageItems,page)
             let sql = `
                 select 
                     SQL_CALC_FOUND_ROWS                         
@@ -88,25 +87,25 @@ module.exports = {
                 sql += ` limit ${(page-1) * pageItems}, ${pageItems}`;
             }
             sql += ";select FOUND_ROWS() as rowscount;";
-            console.log(sql) 
+
             db.select(sql, function(data){
                 res.send(data);          
             })
         })
 
-        app.get('/getUser',function(req, res){
+        // app.get('/getUser',function(req, res){
         
-            var sql = `
-                select                          
-                    *   
-                from
-                    users`
+        //     var sql = `
+        //         select                          
+        //             *   
+        //         from
+        //             users`
                    
-            db.select(sql, function(data){
-                res.send(data);
+        //     db.select(sql, function(data){
+        //         res.send(data);
                 
-            })
-        })
+        //     })
+        // })
         /*------------分页-------------------*/
         // app.get('/getcommodity',function(req,res){
         //     var keyword = req.query.keyword;

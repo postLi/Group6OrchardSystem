@@ -35,20 +35,28 @@ module.exports = {
                 console.log(data)
                 res.send(data)
             })
-            // db.select('user',function(_result){
-            //     console.log(_result)
-                // if(_result.status && _result.data.length > 0){
-                //     var token = jwt.sign({username : req.query.username},'secret',{
-                //             expiresIn: 999
-                //         });
-                //     console.log('ok')
-                //     res.send(_result.status,{'token':token}));
-                // }else{
-                //     console.log('fail')
-                //     res.send(apiResult(false,_result.data));
-                // }
-            // });
         });
+
+        app.get('/getuser',function(req, res){
+            let pageItems = req.query.pageitems;
+            let page = req.query.page;
+            let sql = `
+                select 
+                    SQL_CALC_FOUND_ROWS                         
+                    *    
+                from
+                    user`;
+                   
+            if(page && pageItems) {
+                sql += ` limit ${(page-1) * pageItems}, ${pageItems}`;
+            }
+            sql += ";select FOUND_ROWS() as rowscount;";
+            db.select(sql, function(data){
+                res.send(data);          
+            })
+        })
+
+
         // app.post('/delUser',function(req,res){
         //     db.delete('user',req.body,function(_result){
         //         if(_result.status && _result.data.result.n === 1){

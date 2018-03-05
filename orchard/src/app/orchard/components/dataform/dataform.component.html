@@ -1,0 +1,28 @@
+<div class = "cc">
+	<!-- colsConfig => [account,phone,gender,category] -->
+	<div *ngFor="let col of colsConfig" class = "form">
+		<label>{{privateDic[common.lanType] && privateDic[common.lanType][col] ? privateDic[common.lanType][col] : common.publicDic[common.lanType][col] || col}}</label>
+		<!-- select select-api -->
+		<div *ngIf="colsAttributes[col]" [ngSwitch]="colsAttributes[col].type">
+			<select *ngSwitchCase="'select'">
+				<!-- colsAttributes[col].data => [{"value": 1, "text": "男"}, {"value": 0, "text": "女"}] -->
+				<option [value]="obj.value" [selected]="obj.value == colsAttributes[col].defaultvalue" *ngFor="let obj of colsAttributes[col].data">{{obj.text}}</option>
+			</select>
+
+			<select *ngSwitchCase="'select-api'">
+				<!-- selectApiDataSet => {"category": []} -->
+				<!-- obj[colsAttributes[col].match = {"value": "indexid", "text": "account"} -->
+				<!-- et obj of selectApiDataSet[col] -->
+				<ng-template ngFor let-obj [ngForOf]="selectApiDataSet[col]">
+						<option [value]="obj[colsAttributes[col].match.value]" *ngIf="obj[colsAttributes[col].match.value] == colsAttributes[col].defaultvalue" selected>{{obj[colsAttributes[col].match.text]}}</option>
+						<option [value]="obj[colsAttributes[col].match.value]" *ngIf="obj[colsAttributes[col].match.value] != colsAttributes[col].defaultvalue">{{obj[colsAttributes[col].match.text]}}</option>
+				</ng-template>
+				<!-- <option [value]="obj[colsAttributes[col].match.value]" *ngIf="obj[colsAttributes[col].match.value] != colsAttributes[col].defaultvalue" *ngFor="let obj of selectApiDataSet[col]">{{obj[colsAttributes[col].match.text]}}</option> -->
+				<!-- <option value="" *ngFor="let obj of [] | selectApi: colsAttributes[col].api"></option> -->
+			</select>			
+		</div>
+		<div *ngIf="!colsAttributes[col]" class = "form-right">
+			<input type="text" >
+		</div>
+	</div>
+</div>

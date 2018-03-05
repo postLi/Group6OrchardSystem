@@ -1,5 +1,5 @@
 {
-    "api":"getUser",
+    "api":"getuser",
     "cols":"username,password,date,nickname,email",
     "filterCols":"id,address,password",
     "dictionary":{

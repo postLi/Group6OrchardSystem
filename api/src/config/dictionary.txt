@@ -1,21 +1,29 @@
 {
     "en":{
         "title":"Tittle",
+        "describe":"Describe",
         "saleqty":"Saleqty",
-        "color":"Color",
+        "price":"Price",
+        "saleprice":"Sale Price",
         "qty":"Qty",
         "date":"Date",
         "username":"User Name",
-        "password":"Password"
+        "password":"Password",
+        "email":"E-mail",
+        "nickname":"Nick Name"
     },
     "cn":{
         "title":"名称",
+        "describe":"描述",
         "saleqty":"销量",
-        "color":"颜色",
+        "price":"价钱",
+        "saleprice":"售价",
         "qty":"数量",
         "date":"创建日期",
         "username":"用户名",
-        "password":"密码"
+        "password":"密码",
+        "email":"邮箱",
+        "nickname":"昵称"
     }
     
 }

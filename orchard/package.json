@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 10.3.136.2 --port 88",
+    "start": "ng serve --host 10.3.132.100 --port 88",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -23,6 +23,7 @@
     "@angular/router": "^5.2.0",
     "core-js": "^2.4.1",
     "ng-zorro-antd": "^0.6.15",
+    "ngx-bootstrap": "^2.0.2",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

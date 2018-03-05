@@ -112,7 +112,11 @@ export class DataGridComponent implements OnInit{
             return Utils.dateFormat(new Date(_val), _config.format); 
         } else if(_config.type == "Replace"){
             let reg = new RegExp(_config.reg);
-            return _val.replace(reg, _config.replaceVal);
+            if(_val != null){
+                return _val.replace(reg, _config.replaceVal);       
+            }else{
+                return _val;
+            }
         }
     }
 

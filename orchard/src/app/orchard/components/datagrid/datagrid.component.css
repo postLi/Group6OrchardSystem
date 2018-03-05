@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2018-03-03 19:38:36
 * @Last Modified by:   Marte
-* @Last Modified time: 2018-03-05 09:39:55
+* @Last Modified time: 2018-03-05 14:47:42
 */
 table{
     width:100%;
@@ -13,6 +13,9 @@ thead th{
     border:1px solid#ccc; 
     text-align:center;
     padding:8px 15px;
+    color:#000;
+    font-size:14px;
+    font-weight:600;
 }
 table td{
     font-size:12px;

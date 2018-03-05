@@ -1,24 +1,53 @@
 :host ::ng-deep .logo {
-  	height: 40px;
+  	height: 60px;
   	background-color: #10a2e9;
   	border-radius: 1px;
     width:100%;
-    line-height:40px;
-    font-size:20px;
-    text-align:center;
-    color:#fff;
+    position:relative;
+    .logo-img{
+        width:20%;
+        position:absolute;
+        left:50%;
+        top:50%;
+        border-radius:50%;
+        transform:translate(-50%,-50%);
+        overflow:hidden;
+        img{
+            width:100%;
+        }
+    }
 }
 :host ::ng-deep .logo_img {
     height: 200px;
     background-color: #10a2e9;
     border-radius: 50%;
- 
-    
-   
+}
+.ant-layout-header{
+    height:60px;
+    position:relative;
+}
+.dd{
+    background:#2a6cc3;
+    li{
+        font-size:14px;
+    }
+}
+.exit{
+    position:absolute;
+    right:40px;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+.select{
+    position:absolute;
+    right:80px;
+    top:50%;
+    transform:translate(-50%,-50%);
 }
 
 :host ::ng-deep .ant-layout-sider-collapsed .nav-text {
   	display: none;
+    font-size:14px;
 }
 
 :host ::ng-deep .ant-layout-sider-collapsed .ant-menu-submenu-title:after {

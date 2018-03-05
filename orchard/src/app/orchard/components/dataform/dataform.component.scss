@@ -1,0 +1,23 @@
+/* 
+* @Author: Marte
+* @Date:   2018-03-05 17:36:48
+* @Last Modified by:   Marte
+* @Last Modified time: 2018-03-05 22:29:49
+*/
+.cc{
+    overflow: hidden;
+}
+.form{
+    width:40%;
+    float:left;
+    position:relative;
+    >label{
+        position:absolute;
+        left:10;
+    }
+    .form-right{
+        float:right;
+        padding-left:100px;
+
+   }
+}

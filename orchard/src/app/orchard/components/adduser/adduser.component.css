@@ -1,0 +1,22 @@
+/* 
+* @Author: Marte
+* @Date:   2018-03-05 16:08:54
+* @Last Modified by:   Marte
+* @Last Modified time: 2018-03-05 17:57:40
+*/
+.ant-advanced-search-form {
+    padding: 24px;
+    background: #fbfbfb;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+}
+
+.search-result-list {
+    margin-top: 16px;
+    border: 1px dashed #e9e9e9;
+    border-radius: 6px;
+    background-color: #fafafa;
+    min-height: 200px;
+    text-align: center;
+    padding-top: 80px;
+}

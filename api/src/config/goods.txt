@@ -5,12 +5,12 @@
     "dictionary":{
         "en":{},
         "cn":{
-            "date":"入学时间"
+            "date":"入库时间"
         }
     },
     "multiple":"true",
     "pagination":{
-        "pageitems":15
+        "pageitems":12
     },
     "filterData":{
         "date":{

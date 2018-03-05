@@ -15,10 +15,13 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './orchard/components/home/home.component';
 import { HeightlineDirective } from './orchard/directives/heightline.directive';
 import { DataGridComponent } from './orchard/components/datagrid/datagrid.component';
+import { DataformComponent } from './orchard/components/dataform/dataform.component';
 import { RegComponent } from './orchard/components/reg/reg.component';
 import { LoginComponent } from './orchard/components/login/login.component';
 import { AllgoodsComponent } from './orchard/components/allgoods/allgoods.component';
 import { LianxiComponent } from './orchard/components/lianxi/lianxi.component';
+import { AlluserComponent } from './orchard/components/alluser/alluser.component';
+import { AdduserComponent } from './orchard/components/adduser/adduser.component';
 
 
 @NgModule({
@@ -27,11 +30,14 @@ import { LianxiComponent } from './orchard/components/lianxi/lianxi.component';
     HomeComponent,
     HeightlineDirective,
     DataGridComponent,
+    DataformComponent,
     RegComponent,
     LoginComponent,
     RangePipe,
     AllgoodsComponent,
-    LianxiComponent
+    LianxiComponent,
+    AlluserComponent,
+    AdduserComponent
   ],
   imports: [
     BrowserModule,
