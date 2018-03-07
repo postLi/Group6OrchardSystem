@@ -1,0 +1,4 @@
+{
+    "cols":"title,describes,price,qty",
+    "redactApi":"updatagoods"
+}

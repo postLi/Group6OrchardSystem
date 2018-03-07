@@ -6,6 +6,9 @@ import {HttpModule} from "@angular/http";
 import {RootRouter} from "./orchard/router/router";
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PaginationModule } from 'ngx-bootstrap';
+import { AlertModule } from 'ngx-bootstrap';
+
 
 import {HttpService} from './orchard/utils/http.service';
 import {CommonService} from './orchard/utils/common.service'
@@ -22,6 +25,7 @@ import { AllgoodsComponent } from './orchard/components/allgoods/allgoods.compon
 import { LianxiComponent } from './orchard/components/lianxi/lianxi.component';
 import { AlluserComponent } from './orchard/components/alluser/alluser.component';
 import { AdduserComponent } from './orchard/components/adduser/adduser.component';
+import { AddgoodsComponent } from './orchard/components/addgoods/addgoods.component';
 
 
 @NgModule({
@@ -37,7 +41,8 @@ import { AdduserComponent } from './orchard/components/adduser/adduser.component
     AllgoodsComponent,
     LianxiComponent,
     AlluserComponent,
-    AdduserComponent
+    AdduserComponent,
+    AddgoodsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +51,11 @@ import { AdduserComponent } from './orchard/components/adduser/adduser.component
     RootRouter,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
+    PaginationModule.forRoot(),
+    AlertModule.forRoot(),
     ReactiveFormsModule
   ],
   providers: [HttpService,CommonService],
-  bootstrap: [HomeComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

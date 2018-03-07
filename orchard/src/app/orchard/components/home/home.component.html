@@ -10,22 +10,21 @@
             <li nz-submenu>
                 <span title><i class="anticon anticon-user"></i><span class="nav-text">商品管理</span></span>
                 <ul class = "dd">
-                    <li nz-menu-item><a routerLink="allgoods">所有商品</a></li>
-                    <li nz-menu-item><a routerLink="lianxi">练习</a></li>
-                    <li nz-menu-item>Bill</li>
-                    <li nz-menu-item>Alex</li>
+                    <li nz-menu-item><a routerLink="/allgoods">所有商品</a></li>
+                    <li nz-menu-item><a routerLink="/addgoods">添加商品</a></li>
+                    <li nz-menu-item><a routerLink="/lianxi">练习</a></li>
                 </ul>
             </li>
             <li nz-submenu>
                 <span title><i class="anticon anticon-team"></i><span class="nav-text">权限管理</span></span>
                 <ul class = "dd">
-                    <li nz-menu-item><a routerLink="alluser">用户列表</a></li>
-                    <li nz-menu-item><a routerLink="adduser">用户添加</a></li>
+                    <li nz-menu-item><a routerLink="/alluser">用户列表</a></li>
+                    <li nz-menu-item><a routerLink="/adduser">用户添加</a></li>
                 </ul>
             </li>
-            <li nz-menu-item>
+            <!-- <li nz-menu-item>
                 <span><i class="anticon anticon-file"></i><span class="nav-text">File</span></span>
-            </li>
+            </li> -->
         </ul>
     </nz-sider>
     <nz-layout>
@@ -41,11 +40,7 @@
             </select>   
         </nz-header>
         <nz-content style="margin:16px;">
-            <!-- <nz-breadcrumb style="">
-                <nz-breadcrumb-item>User</nz-breadcrumb-item>
-                <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
-            </nz-breadcrumb> -->
-            <div style="padding:24px; background: #fff; min-height: 580px;">
+            <div style="padding:24px; background: #fff; min-height: 650px;">
                 <router-outlet></router-outlet> 
             </div>
         </nz-content>

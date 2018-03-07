@@ -4,6 +4,7 @@ import {
     FormGroup,
     Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HttpService } from '../../utils/http.service'
 import { NzModalService } from 'ng-zorro-antd';
 
@@ -15,8 +16,8 @@ import { NzModalService } from 'ng-zorro-antd';
 })
 export class LoginComponent implements OnInit {
     validateForm: FormGroup;
-    constructor(private fb: FormBuilder,private http: HttpService,private confirmServ: NzModalService) {}
-
+    constructor(private fb: FormBuilder,private http: HttpService,private confirmServ: NzModalService,private router: Router) {}
+    loging:boolean = false;
     username:String;
     password:String;
     _submitForm() {
@@ -55,19 +56,22 @@ export class LoginComponent implements OnInit {
         });
     }
     login(){
+        this.loging = true;
         let params = {};
         params['username'] = this.username;
         params['password'] = this.password;
-        console.log(this.username)
         if(this.username ==undefined||this.password==undefined){
             this.warning();
         }else{
             this.http.get('login',params).then((res)=>{
+                
                 let len = res['data'].results.length;
                 if(len==0){
                     this.error();
+                    this.loging = false;
                 }else{
-
+                    this.loging = false;
+                    this.router.navigate(["/allgoods"]);
                 }
             })     
         }

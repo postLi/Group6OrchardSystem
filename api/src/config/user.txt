@@ -5,7 +5,7 @@
     "dictionary":{
         "en":{
             "email":"E-mail",
-            "nickname":"Nick Name"
+            "nickname":"NickName"
         },
         "cn":{
             "date":"注册时间",
@@ -34,5 +34,6 @@
             "reg":"qq",
             "replaceVal":"163"
         }
-    }
+    },
+    "goodsRedact":"config/userredact.txt"
 }

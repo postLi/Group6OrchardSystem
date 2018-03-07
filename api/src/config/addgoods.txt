@@ -1,0 +1,4 @@
+{
+    "cols":"title,describes,price,saleprice,qty,date",
+    "api":"addgoods"
+} 

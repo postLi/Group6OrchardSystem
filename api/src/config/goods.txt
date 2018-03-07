@@ -1,5 +1,7 @@
 {
     "api":"getAll",
+    "delapi":"delgoods",
+    "redactApi":"updatagoods",
     "cols":"*",
     "filterCols":"id,bigtypeid,smalltypeid,detailsimg,mainimg,hot",
     "dictionary":{
@@ -10,12 +12,13 @@
     },
     "multiple":"true",
     "pagination":{
-        "pageitems":12
+        "pageitems":10
     },
     "filterData":{
         "date":{
             "type":"DateFormat",
             "format":"yyyy年MM月dd日 hh:mm:ss"
         }
-    }
+    },
+    "goodsRedact":"config/goodsredact.txt"
 }

@@ -2,13 +2,13 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Http} from '@angular/http';
 import $ from '../../utils/httpclient'
 import {Utils} from '../../utils/utils'
-
+import {HttpService} from '../../utils/http.service'
 import {CommonService} from '../../utils/common.service'
 
 @Component({
     selector: 'datagrid',
     templateUrl: './datagrid.component.html',
-    styleUrls: ['./datagrid.component.css']
+    styleUrls: ['./datagrid.component.scss']
 })
 
 export class DataGridComponent implements OnInit{
@@ -24,14 +24,34 @@ export class DataGridComponent implements OnInit{
     apiConfig: string;
     searchConfig: Object = {};
     rowsCount:number;
-
+    redactApi:string;
+    redactShow:boolean = false;
+    currentDataset:Array<any> = null;
+    goodsredact:string;
+    delapi:string;
     @Input() config: string;
+    Page:Number;
+    loging:boolean = false;
+   
+    totalItems:Number;
+    maxSize: number = 5;
+    currentPage = 1;
+    smallnumPages = 0;
+    itemsPerPage:Number;
+    currentId:Number;
+    // setPage(pageNo: number): void {
+    //     this.currentPage = pageNo;
+    // }
+    
 
-    constructor(private http: Http, private common: CommonService){}
+
+    constructor(private common: CommonService,private http: HttpService){}
 
     ngOnInit(){
+        this.loging = true;
         //获取当前模块的配置
-        $.get(this.http, this.config).then((configRes) => {
+        this.http.get(this.config).then((configRes) => {
+            this.loging = false;
 
             let cols = configRes['cols'];
             this.columns = !cols || cols == '*' ? [] : cols.split(',');
@@ -43,7 +63,6 @@ export class DataGridComponent implements OnInit{
             this.privateDic = dic || {};
 
             this.multiple = configRes['multiple'];
-            console.log(this.multiple,configRes)
 
             this.filterDataConfig = configRes['filterData'] || {};
 
@@ -53,32 +72,46 @@ export class DataGridComponent implements OnInit{
             
             this.searchConfig = configRes['search'] || {};
 
+            //编辑
+            this.redactApi = configRes['redactApi'] || {};
+
+            //删除
+            this.delapi = configRes['delapi'] || {};
+
+            this.goodsredact = configRes['goodsRedact'] || null;
+            
+
             this.apiRequest();
 
         })
     }
 
     apiRequest(_page = 1){
+        this.loging = true;
         let pageParams = {};
         if(this.paginationConfig){
             pageParams['pageitems'] = this.paginationConfig['pageitems'];
             pageParams['page'] = _page;
         }        
         //配置信息中的 api
-        $.get(this.http, this.apiConfig, pageParams).then((apiRes) => {
-            
+        this.http.get(this.apiConfig, pageParams).then((apiRes) => {
+            this.loging = false;
             this.dataset = apiRes['data'].results[0];
             this.rowsCount = apiRes['data'].results[1][0].rowscount;
+            this.totalItems =  this.rowsCount;
+            console.log(this.rowsCount,this.totalItems)
             console.log(apiRes['data'].results[1])
             let pageItems = this.paginationConfig['pageitems'];
-
+            this.itemsPerPage = pageItems;
             this.pageCount = Math.ceil(this.rowsCount / pageItems);
-            console.log(this.pageCount,pageItems)
+             
         })
     }
 
     getKeys(item){
-        return Object.keys(item);
+        if(item){
+            return Object.keys(item);   
+        }
     }
 
     selectTr(_idx){
@@ -104,6 +137,11 @@ export class DataGridComponent implements OnInit{
         }
     }
 
+    parentEvent(val){
+        this.redactShow = val;
+
+    }
+
     filterData(_key, _val){
         let _config = this.filterDataConfig[_key];
         if(!_config){
@@ -119,20 +157,41 @@ export class DataGridComponent implements OnInit{
             }
         }
     }
+    pageChanged(event: any): void {
+        this.Page = event.page;
+        this.apiRequest(event.page);
+    }
+    //编辑
+    redact(idx){
+        this.redactShow = true;
+        this.currentDataset = this.dataset[idx];
+        // console.log(this.currentDataset)
+       
+        let _id = this.dataset[idx].id;
+        this.currentId = _id;
 
-    goto(event){
-        // console.log(event.target.ant-pagination-item-active)
-        // let _page = event.target.innerText;
-        var _page;
-        // console.log(isNaN(event.target.innerText));
-        var len = event.path[2].children;
-        for(var i=0;i<len.length;i++){
-            // console.log(len[i].className)
-            if(len[i].className =='ant-pagination-item ant-pagination-item-active ng-star-inserted'){
-                _page = len[i].innerText
+  
+    }
+    del(idx){
+        let id = this.dataset[idx].id;
+        let params = {};
+        params['id'] = id;
+        this.http.post(this.delapi,params).then((res)=>{
+            if(res['status']){
+                this.dataset.splice(idx,1)
+
+                if(this.dataset.length==0){
+                    let currentPage;
+                    if(this.Page>1){  
+                        currentPage = Number(this.Page)-1;    
+                    }else{
+                        currentPage = Number(this.Page)+1
+                    }
+                    this.apiRequest(currentPage);
+                }
             }
-        }
-        this.apiRequest(_page);
+             
+        })
 
     }
 }

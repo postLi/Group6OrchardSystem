@@ -2,77 +2,7 @@ var db = require('../db/db')
 
 module.exports = {
     register: function(app){
-        app.get('/getgoodslist', function(req, res){
-            var keyword = req.query.keyword;
-            var type = req.query.type;
-            var dec = req.query.desc;
-            var sql = `
-                select                           
-                    g.*
-                from
-                    goods g 
-                    inner join bigtype b on g.bigtype = b.id
-                where
-                    type = '${keyword}'
-            `;
-            if(type == '销量'){
-                console.log(dec)
-                if(dec == 'false'){
-                  
-                    sql +='order by saleqty desc';
-                }else{  
-                   
-                    sql +='order by saleqty asc';
-                }
-            }else if(type == '价钱'){
-                if(dec == 'false'){
-                    sql+='order by saleprice desc';
-                }else{
-                    sql+='order by saleprice asc'
-                }
-            }
-            db.select(sql, function(data){
-               
-                res.send(data);
-            })
-        })
-        app.get('/getdetails',function(req, res){
-            var goodid = req.query.gid;
-            var sql = `
-            select                           
-                *
-            from
-                goods 
-            where
-                id = ${goodid}
-            `;   
-            db.select(sql, function(data){
-               
-                    res.send(data);
-                
-            })
-        })
-        app.post('/comment',function(req, res){
-            var gid = req.body.goodsId;
-        
-            var sql = `
-                select 
-                    gr.*,                          
-                    g.*,
-                    u.username
-                from
-                    
-                    grade gr
-                    inner join goods g  on g.id = gr.gid
-                    inner join users u on gr.userid = u.id
-                where 
-                    gr.gid = gid`;
-            db.select(sql, function(data){
-                res.send(data);
-                
-            })
-        })
-
+        //得到商品
         app.get('/getAll',function(req, res){
             let pageItems = req.query.pageitems;
             let page = req.query.page;
@@ -92,106 +22,50 @@ module.exports = {
                 res.send(data);          
             })
         })
-
-        // app.get('/getUser',function(req, res){
-        
-        //     var sql = `
-        //         select                          
-        //             *   
-        //         from
-        //             users`
-                   
-        //     db.select(sql, function(data){
-        //         res.send(data);
+        app.post('/updatagoods',function(req, res){
+            let _id = req.body.id;
+            let _tittle = req.body.title;
+            let _price = req.body.price;
+            let _qty = req.body.qty;
+            let _describes = req.body.describes;
+            let sql = `update goods set title = '${_tittle}', price = ${_price},qty =${_qty},describes = '${_describes}' where id = ${_id}`;
+            db.update(sql, (result) => {
+                // sql = `select * from orders where id = `
+                res.send(result);
+            })
+        })
+         //删除商品
+        app.post('/delgoods',function(req,res){
+            // let ids = req.body.ids;//购物车商品id
+            let id = req.body.id;
+            console.log(id);
+            let sql = `
+                    delete 
+                        from
+                        goods
+                    where 
+                        id in (${id})`;
                 
-        //     })
-        // })
-        /*------------分页-------------------*/
-        // app.get('/getcommodity',function(req,res){
-        //     var keyword = req.query.keyword;
-        //     var limit = req.query.limit * 1;
-        //     var page = req.query.page * 1;
-        //     console.log(limit,page)
-        //     var sql = `
-        //         select
-        //             SQL_CALC_FOUND_ROWS
-        //             *
-        //         from
-        //             goods
-        //             where type = '${keyword}'
-        //             limit ${(page - 1) * limit}, ${limit};
-        //             select FOUND_ROWS() as rowscount;
-        //     `;
-        //     db.select(sql, function(data){
-        //         console.log(data)
-        //         res.send(data);
-        //     })
-        // })
-        /*------------------搜索-------------------*/
-        // app.get('/seek',function(req,res){
-        //     var seekkeyword = req.query.keyword;
-        //     console.log(seekkeyword)
-        //     var limit = req.query.limit * 1;
-        //     var page = req.query.page * 1;
-        //     var sql = `
-        //         SELECT
-        //             SQL_CALC_FOUND_ROWS
-        //             * 
-        //             FROM
-        //         goods WHERE title LIKE  '%${seekkeyword}%' 
-        //         limit ${(page - 1) * limit}, ${limit};
-        //         select FOUND_ROWS() as rowscount;
-        //         `;
-        //     db.select(sql, function(data){
-        //         // console.log(data)
-        //         res.send(data);
-        //     })
-        // })
-        /*------------------所有---------------*/
-        // app.get('/getall',function(req,res){
-        //     // var seekkeyword = req.query.keyword;
-        //     // console.log(seekkeyword)
-        //     var limit = req.query.limit * 1 || 10;
-        //     var page = req.query.page * 1 || 1;
-        //     var sql = `
-        //         SELECT
-        //             SQL_CALC_FOUND_ROWS
-        //             * 
-        //             FROM
-        //         goods
-        //         limit ${(page - 1) * limit}, ${limit};
-        //         select FOUND_ROWS() as rowscount;
-        //         `;
-        //     db.select(sql, function(data){
-        //         // console.log(data)
-        //         res.send(data);
-        //     })
-        // })
-
-        // app.get('/getdetails',function(req, res){
-        //     var goodid = req.query.gid;
-        //     var sql = `
-        //     select                           
-        //         g.*
-        //     from
-        //             goods g 
-        //             inner join grade gr on g.id = gr.id
-        //     where
-        //         id = ${goodid}
-        //     `;   
-        //     db.select(sql, function(data){
-        //         console.log(data.data.results)
-        //         if(data.data.results.length<=0){  
-        //             sql = `select * from goods where id = ${goodid}`
-        //             db.select(sql,function(data){
-        //                 res.send(data);
-        //             })
-        //         }else{
-        //             res.send(data);
-
-        //         }
                 
-        //     })
-        // })
+            db.delete(sql,(date)=>{
+                res.send(date);
+            })
+        })
+
+        //添加商品
+        app.post('/addgoods',function(req,res){
+            var title = req.body.title;
+            var qty = req.body.qty;
+            var saleprice = req.body.saleprice;
+            var describes = req.body.describes;
+            var price = req.body.price;
+            var data = req.body.data;
+            let sql = `
+                insert into goods (title,qty,saleprice,describes,price) values ('${title}',${qty},${saleprice},'${describes}',${price})`
+            db.insert(sql,function(data){
+                res.send(data)
+            })
+        })
+
     }
 }

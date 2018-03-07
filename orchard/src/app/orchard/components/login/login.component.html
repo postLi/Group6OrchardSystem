@@ -1,6 +1,7 @@
 <div class = 'login'>
 
     <div  class = "login-f" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="_submitForm()">
+        <h4>后台管理系统</h4>
         <div nz-form-item>
             <div nz-form-control [nzValidateStatus]="validateForm.controls.userName" >
                 <nz-input formControlName="userName" (blur)='verify()' [(ngModel)]= 'username'[nzPlaceHolder]="'请输入用户名！'" [nzSize]="'large'">
@@ -37,4 +38,10 @@
         </div>
     </div>
 </div>
+
+<nz-spin [nzTip]="'正在读取数据...'" [nzSize]="'large' "*ngIf = 'loging' class = 'loging'>
+      <nz-alert [nzType]="'info'">
+      </nz-alert>
+</nz-spin>
+
 

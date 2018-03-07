@@ -1,33 +1,49 @@
-<div *ngIf="dataset">
+<div *ngIf="dataset" class = 'c-content-inner alltabel' >
    <!--  <div *ngIf="searchConfig.show">
         <dataform [api]="searchConfig.api"></dataform>
     </div> -->
-    <table>
+    <table class="table table-bordered">
         <thead>
-            <tr>
-                <th *ngIf="multiple"><input type="checkbox" [checked]="currentTrIndexs.length == dataset.length" (click)="selectAll()"></th>
+            <tr class="text-center">
+                <th *ngIf="multiple"><input type="checkbox" [checked]="currentTrIndexs.length == dataset.length" (click)="selectAll()" class="text-center" nz-checkbox></th>
                 <ng-template ngFor let-key [ngForOf]="getKeys(dataset[0])" >
-                    <th *ngIf="(!columns[0] || columns.indexOf(key) > -1) && filterColumns.indexOf(key) < 0">{{privateDic[common.lanType] && privateDic[common.lanType][key] ? privateDic[common.lanType][key] : common.publicDic[common.lanType][key] || key}}</th>
+                    <th *ngIf="(!columns[0] || columns.indexOf(key) > -1) && filterColumns.indexOf(key) < 0" class="text-center">{{privateDic[common.lanType] && privateDic[common.lanType][key] ? privateDic[common.lanType][key] : common.publicDic[common.lanType][key] || key}}</th>
                 </ng-template>
-                <th>编辑</th>
+                <th class="text-center">编辑</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let obj of dataset; let idx = index,let even = even;"[class.even]= 'even' [class.active]="currentTrIndexs.indexOf(idx) > -1" (click)="selectTr(idx)">
-                <td *ngIf="multiple"><input type="checkbox" name="" id="" [checked]="currentTrIndexs.indexOf(idx) > -1"></td>
+            <tr *ngFor="let obj of dataset; let idx = index,let even = even;"[class.even]= 'even' [class.active]="currentTrIndexs.indexOf(idx) > -1"  class="text-center">
+                <td *ngIf="multiple"><input type="checkbox"(click)="selectTr(idx)" [checked]="currentTrIndexs.indexOf(idx) > -1"></td>
                 <ng-template ngFor let-key [ngForOf]="getKeys(obj)">
                     <td *ngIf="(!columns[0] || columns.indexOf(key) > -1) &&  filterColumns.indexOf(key) < 0">{{filterData(key, obj[key])}}</td>
                 </ng-template>
-                <td><button>查看</button><button>删除</button></td>
+                <td class="text-center">
+                    <button class="btn btn-success btn-sm" (click)='redact(idx)'><i class="fa fa-pencil fa-fw"></i> 编辑</button>
+                    <button class="btn btn-danger btn-sm" (click)='del(idx)'><i class="fa fa-trash-o fa-fw"></i> 删除</button>
+                </td>
+                <!-- <td><button>查看</button><button>删除</button></td> -->
                 
             </tr>
 
         </tbody>
     </table>
-    <div *ngIf="paginationConfig.pageitems" (click)="goto($event)"> 
-        <nz-pagination [nzPageIndex]="1" [nzTotal]="rowsCount"></nz-pagination>
+    <div class="row page" *ngIf="paginationConfig.pageitems" >
+        <div class="col-xs-12 col-12">
+            <pagination [boundaryLinks]="true" [itemsPerPage]="itemsPerPage"[totalItems]="totalItems" [maxSize]="maxSize" class = "pagination-sm" [(ngModel)]="currentPage" class="pagination-sm"previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [rotate]="false" (pageChanged)="pageChanged($event)">
+            </pagination>
+        </div>
     </div>
-    <!-- <div *ngIf="paginationConfig.pageitems" (click)="goto($event)">
-        <input type="button" [value]="i" *ngFor="let i of [] | range: pageCount">
-    </div> -->
 </div>
+<div class = 'tc' *ngIf="redactShow">
+    <div class="shade">
+        <dataform [api] = "goodsredact" (parentAttr)="parentEvent($event)" [currentDataset] = 'currentDataset' [id] = "currentId"></dataform> 
+    </div>
+</div>
+
+<nz-spin [nzTip]="'正在读取数据...'" [nzSize]="'large' "*ngIf = 'loging' class = 'loging'>
+      <nz-alert [nzType]="'info'">
+      </nz-alert>
+</nz-spin>
+
+

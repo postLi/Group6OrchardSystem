@@ -1,40 +1,13 @@
-// import {Http, RequestOptions, RequestMethod} from '@angular/http'
-// import {Injectable} from '@angular/core';
-
-// @Injectable()
-// export class HttpService{
-//     constructor(private http: Http){}
-
-//     private baseUrl:string = 'http://localhost:8080/';
-//     private getUrl(_url){
-//         if(_url.startsWith('http')){
-//             return _url;
-//         }
-//         return this.baseUrl + _url;
-//     }
-
-//     get(api, params = {}){
-//         return new Promise((resolve, reject) => {
-//             params['_'] = Math.random();
-//             this.http.get(this.getUrl(api), new RequestOptions({
-//                 method: RequestMethod.Get,
-//                 search: params
-//             })).toPromise().then((res) => {
-//                 resolve(res.json());
-//             })
-//         })
-//     }
-// }
 import { Http, RequestOptions, RequestMethod, Headers } from '@angular/http'
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class HttpService{
     constructor( private http: Http ) { }
-    private baseUrl: string = 'http://localhost:8080/';
+    private baseUrl: string = 'http://10.3.132.100:8080/';
     private getUrl(_url){
         console.log(_url)
-        if ( _url.startsWith('http')){
+        if (_url.startsWith('http')){
             return _url;
         }
         return this.baseUrl + _url;
@@ -42,7 +15,7 @@ export class HttpService{
     get(api,params={}){
         return new Promise((resolve,reject)=>{
             params['_'] = Math.random().toString().slice(2);
-            this.http.get( this.getUrl( api ), new RequestOptions({
+            this.http.get(this.getUrl( api ), new RequestOptions({
                 method: RequestMethod.Get,
                 search: params
             })).toPromise().then((res)=>{
@@ -52,6 +25,7 @@ export class HttpService{
     }
     
     post(api,params={}){
+        console.log(api)
         return new Promise((resolve,reject)=>{
             function str( data )
             {
@@ -60,8 +34,8 @@ export class HttpService{
                     ret += encodeURIComponent( it ) + '=' + encodeURIComponent( data[it] ) + '&'
                 }
                 return ret;
-            }            
-            this.http.post( this.getUrl( api ), new RequestOptions( {
+            }
+            this.http.request( this.getUrl( api ), new RequestOptions( {
                 method: RequestMethod.Post,
                 body: str(params),
                 headers: new Headers({
@@ -69,9 +43,10 @@ export class HttpService{
                 })
             } ) ).toPromise().then( ( res ) =>
             {
-                resolve( res.json() )
+                resolve(res.json())
             } )
         })
     }
+
 
 }

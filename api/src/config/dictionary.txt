@@ -1,20 +1,20 @@
 {
     "en":{
         "title":"Tittle",
-        "describe":"Describe",
+        "describes":"Describes",
         "saleqty":"Saleqty",
         "price":"Price",
         "saleprice":"Sale Price",
         "qty":"Qty",
         "date":"Date",
-        "username":"User Name",
+        "username":"UserName",
         "password":"Password",
         "email":"E-mail",
-        "nickname":"Nick Name"
+        "nickname":"NickName"
     },
     "cn":{
         "title":"名称",
-        "describe":"描述",
+        "describes":"描述",
         "saleqty":"销量",
         "price":"价钱",
         "saleprice":"售价",

@@ -55,6 +55,19 @@ module.exports = {
                 res.send(data);          
             })
         })
+        //添加用户
+        app.post('/addadmin',function(req,res){
+            var nickname = req.body.nickname;
+            var username = req.body.username;
+            var password = req.body.password;
+            var email = req.body.email;
+            let sql = `
+                insert into goods (title,qty,saleprice,describes,price) values ('${title}',${qty},${saleprice},'${describes}',${price})`
+            db.insert(sql,function(data){
+                res.send(data)
+            })
+        })
+
 
 
         // app.post('/delUser',function(req,res){
