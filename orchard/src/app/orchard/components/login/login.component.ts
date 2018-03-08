@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
     validateForm: FormGroup;
     constructor(private fb: FormBuilder,private http: HttpService,private confirmServ: NzModalService,private router: Router) {}
     loging:boolean = false;
-    username:String;
-    password:String;
+    username:any;
+    password:any;
     _submitForm() {
         for (const i in this.validateForm.controls) {
             this.validateForm.controls[ i ].markAsDirty();
@@ -56,13 +56,14 @@ export class LoginComponent implements OnInit {
         });
     }
     login(){
-        this.loging = true;
+        
         let params = {};
         params['username'] = this.username;
         params['password'] = this.password;
         if(this.username ==undefined||this.password==undefined){
             this.warning();
         }else{
+            this.loging = true;
             this.http.get('login',params).then((res)=>{
                 
                 let len = res['data'].results.length;
@@ -70,6 +71,9 @@ export class LoginComponent implements OnInit {
                     this.error();
                     this.loging = false;
                 }else{
+                    console.log(this.username)
+                    window.sessionStorage.setItem("username",this.username);
+                    
                     this.loging = false;
                     this.router.navigate(["/allgoods"]);
                 }

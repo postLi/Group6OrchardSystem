@@ -8,7 +8,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap';
 import { AlertModule } from 'ngx-bootstrap';
-
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 import {HttpService} from './orchard/utils/http.service';
 import {CommonService} from './orchard/utils/common.service'
@@ -19,10 +19,9 @@ import { HomeComponent } from './orchard/components/home/home.component';
 import { HeightlineDirective } from './orchard/directives/heightline.directive';
 import { DataGridComponent } from './orchard/components/datagrid/datagrid.component';
 import { DataformComponent } from './orchard/components/dataform/dataform.component';
-import { RegComponent } from './orchard/components/reg/reg.component';
 import { LoginComponent } from './orchard/components/login/login.component';
 import { AllgoodsComponent } from './orchard/components/allgoods/allgoods.component';
-import { LianxiComponent } from './orchard/components/lianxi/lianxi.component';
+
 import { AlluserComponent } from './orchard/components/alluser/alluser.component';
 import { AdduserComponent } from './orchard/components/adduser/adduser.component';
 import { AddgoodsComponent } from './orchard/components/addgoods/addgoods.component';
@@ -35,11 +34,9 @@ import { AddgoodsComponent } from './orchard/components/addgoods/addgoods.compon
     HeightlineDirective,
     DataGridComponent,
     DataformComponent,
-    RegComponent,
     LoginComponent,
     RangePipe,
     AllgoodsComponent,
-    LianxiComponent,
     AlluserComponent,
     AdduserComponent,
     AddgoodsComponent
@@ -53,6 +50,7 @@ import { AddgoodsComponent } from './orchard/components/addgoods/addgoods.compon
     NgZorroAntdModule.forRoot(),
     PaginationModule.forRoot(),
     AlertModule.forRoot(),
+    BsDropdownModule.forRoot(),
     ReactiveFormsModule
   ],
   providers: [HttpService,CommonService],

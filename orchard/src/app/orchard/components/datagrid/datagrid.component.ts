@@ -32,13 +32,13 @@ export class DataGridComponent implements OnInit{
     @Input() config: string;
     Page:Number;
     loging:boolean = false;
-   
     totalItems:Number;
     maxSize: number = 5;
     currentPage = 1;
     smallnumPages = 0;
     itemsPerPage:Number;
     currentId:Number;
+    searchData:object;
     // setPage(pageNo: number): void {
     //     this.currentPage = pageNo;
     // }
@@ -70,7 +70,9 @@ export class DataGridComponent implements OnInit{
 
             this.apiConfig = configRes['api'];
             
+            //搜索
             this.searchConfig = configRes['search'] || {};
+            console.log(this.searchConfig)
 
             //编辑
             this.redactApi = configRes['redactApi'] || {};
@@ -92,18 +94,21 @@ export class DataGridComponent implements OnInit{
         if(this.paginationConfig){
             pageParams['pageitems'] = this.paginationConfig['pageitems'];
             pageParams['page'] = _page;
-        }        
+            pageParams['search'] = this.searchData || {};
+        }     
+        console.log(pageParams)   
         //配置信息中的 api
         this.http.get(this.apiConfig, pageParams).then((apiRes) => {
             this.loging = false;
             this.dataset = apiRes['data'].results[0];
             this.rowsCount = apiRes['data'].results[1][0].rowscount;
+            console.log(this.rowsCount,apiRes)
             this.totalItems =  this.rowsCount;
-            console.log(this.rowsCount,this.totalItems)
-            console.log(apiRes['data'].results[1])
+            console.log(this.totalItems)
             let pageItems = this.paginationConfig['pageitems'];
             this.itemsPerPage = pageItems;
             this.pageCount = Math.ceil(this.rowsCount / pageItems);
+            console.log(this.pageCount)
              
         })
     }
@@ -139,6 +144,18 @@ export class DataGridComponent implements OnInit{
 
     parentEvent(val){
         this.redactShow = val;
+    }
+    searchEvent(_data){
+        console.log(_data) 
+        this.apiConfig = _data.searchApi;
+        this.searchData = _data.params; 
+        console.log(this.searchData)
+        this.apiRequest();
+
+        // console.log(data)
+        // this.dataset = data['data'].results[0];
+        // console.log(this.dataset)
+        //  this.rowsCount = data['data'].results[1][0].rowscount;
 
     }
 
@@ -192,6 +209,5 @@ export class DataGridComponent implements OnInit{
             }
              
         })
-
     }
 }

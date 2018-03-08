@@ -1,0 +1,4 @@
+{
+    "cols":"title,price",
+    "searchApi":"findgoods"
+}

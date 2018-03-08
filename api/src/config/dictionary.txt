@@ -10,7 +10,8 @@
         "username":"UserName",
         "password":"Password",
         "email":"E-mail",
-        "nickname":"NickName"
+        "nickname":"NickName",
+        "phone":"Phone"
     },
     "cn":{
         "title":"名称",
@@ -23,7 +24,8 @@
         "username":"用户名",
         "password":"密码",
         "email":"邮箱",
-        "nickname":"昵称"
+        "nickname":"昵称",
+        "phone":"手机号"
     }
     
 }

@@ -5,12 +5,33 @@
 * @Last Modified time: 2018-03-06 11:42:56
 */
 
+.table>tbody>tr>td{
+    vertical-align: middle;
+    font-size:14px;
+    .checkbox{
+        background:#ccc;
+        color:#fff;
+    }
+}
+.table>thead>tr>th{
+    text-align:center;
+    vertical-align: middle;
+}
+.table-bordered>thead>tr>th{
+    border-bottom-width: 1px;
+}
+.table>tbody>.active>td{
+    background:#1190d6 !important;
+    color:#fff;
+}
+
+
 .alltabel{
-    height:600px;
+    height:640px;
     position:relative;
     .page{
         position:absolute;
-        bottom:0px;
+        bottom:-10px;
         right:30px;
     }
 }
@@ -40,6 +61,7 @@
     .shade{
         background:#fff;
         position:absolute;
+        border-radius:10px;
         left:50%;
         top:50%;
         padding:20px;
@@ -48,5 +70,16 @@
         .buttom{
             padding-left:80%;
         }
+        h5{
+            height:30px;
+            color:#ccc;
+            font-size:16px;
+            line-height:30px;
+            padding-left:28px;
+        }
     }
+}
+.even{
+    background-color: rgba(158, 158, 158, 0.14);
+    
 }

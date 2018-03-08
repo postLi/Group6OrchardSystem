@@ -24,4 +24,41 @@
 .btns{
     padding-left:45%;
 }
+.search{
+    height:50px;
+    h5{
+        height:20px;
+        line-height:20px;
+        border-left:3px solid #1190d6;
+        padding-left:20px;
+        margin-bottom:10px;
+    }
+}
+.alert{
+    position:absolute;
+    top:50px;
+    left:50%;
+    height:50px;
+    width:400px;
+    
+    transform:translate(-50%,-50%);
+    >p{
+        border-radius:20px;
+        height:30px;
+        padding:0 10px;
+        line-height:30px;
+        font-size:16px;
+        position:relative;
+        .sc{
+            position:absolute;
+            right:20px;
+        }
+
+    }
+}
+.alert-success{
+    background-color: #4dbd74 !important;
+    color:#fff !important;
+}
+
 

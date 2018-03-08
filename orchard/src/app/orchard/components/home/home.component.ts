@@ -5,19 +5,27 @@ import {MenuItem} from 'primeng/api';
 import {CommonService} from '../../utils/common.service'
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+	selector: 'app-home',
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-    lanType: string = "en";
-    isCollapsed = false;
-    constructor(private router: Router,private common: CommonService) { }
-    ngOnInit() {
-    }
-    exit(){
-        this.router.navigate(["login"]);
-    }
+		lanType: string = "en";
+		isCollapsed = false;
+		username:string;
+		constructor(private router: Router,private common: CommonService) { }
+		ngOnInit() {
+			let username1 = sessionStorage.getItem("username");
+			
+			this.username = username1;
+			if(!username1){
+				this.router.navigate(["login"]);
+			}
+		}
+		exit(){
+			sessionStorage.removeItem("username");
+			this.router.navigate(["login"]);
+		}
 
 }    
 

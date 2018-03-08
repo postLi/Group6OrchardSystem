@@ -1,3 +1,4 @@
 {
-    "cols":"username,password,nickname,email"
+    "cols":"username,password,nickname,email",
+    "redactApi":"updatauser"
 }

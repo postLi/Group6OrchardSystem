@@ -2,37 +2,12 @@ var jwt = require('jsonwebtoken');
 var db = require('../db/db')
 module.exports = {
     register:function(app){
-        // app.post('/register',function(req,res){
-        //     db.select('user',{'username':req.body.username},function(_result){
-        //         if(_result.status && _result.data.length > 0){
-        //             res.send(apiResult(false,_result.data));
-        //         }else if(_result.status && _result.data.length == 0){
-        //             db.insert('user',req.body,function(_result){
-        //                 if(_result.status && _result.data.result.n === 1){
-        //                     res.send(apiResult(true,_result.data.ops));
-        //                 }else{
-        //                     res.send(apiResult(false,{'err':'error'}));
-        //                 }
-        //             })
-        //         }else{
-        //             res.send(apiResult(false,{'err':'error'}));
-        //         }
-        //     })
-        // });
-        // app.get('/validate',function(req,res){
-        //     let username = req.query.username;
-        //     var sql = `select * from user where username = ${username}`;
-        //     db.select(sql,function(data){
-        //         res.send(data);
-        //     })
-        // })
         app.get('/login',function(req,res){
             let username = req.query.username;
             let password = req.query.password;
             console.log(username,password)
-            var sql = `select * from user where username = '${username}' and password='${password}'`;
+            var sql = `select * from admin where username = '${username}' and password='${password}'`;
             db.select(sql,function(data){
-                console.log(data)
                 res.send(data)
             })
         });
@@ -45,7 +20,7 @@ module.exports = {
                     SQL_CALC_FOUND_ROWS                         
                     *    
                 from
-                    user`;
+                    admin`;
                    
             if(page && pageItems) {
                 sql += ` limit ${(page-1) * pageItems}, ${pageItems}`;
@@ -56,54 +31,52 @@ module.exports = {
             })
         })
         //添加用户
-        app.post('/addadmin',function(req,res){
-            var nickname = req.body.nickname;
+        app.post('/adduser',function(req,res){
+            var phone = req.body.phone;
             var username = req.body.username;
             var password = req.body.password;
             var email = req.body.email;
             let sql = `
-                insert into goods (title,qty,saleprice,describes,price) values ('${title}',${qty},${saleprice},'${describes}',${price})`
+                insert into admin (phone,username,password,email) values ('${phone}','${username}','${password}','${email}')`
+            db.insert(sql,function(data){
+                res.send(data)
+            })
+        })
+        //修改用户
+        app.post('/updatauser',function(req,res){
+            var id = req.body.id;
+            var phone = req.body.phone;
+            var username = req.body.username;
+            var password = req.body.password;
+            var email = req.body.email;
+            console.log(id,phone,username,password,email)
+            let sql = `
+                update admin set phone = '${phone}',username = '${username}',password = '${password}',email = '${email}' where id = ${id}`;
+
             db.insert(sql,function(data){
                 res.send(data)
             })
         })
 
+        //删除用户
+        app.post('/deluser',function(req,res){
+            // let ids = req.body.ids;//购物车商品id
+            let id = req.body.id;
+            console.log(id);
+            let sql = `
+                    delete 
+                        from
+                        admin
+                    where 
+                        id in (${id})`;
+                
+                
+            db.delete(sql,(date)=>{
+                res.send(date);
+            })
+        })
 
 
-        // app.post('/delUser',function(req,res){
-        //     db.delete('user',req.body,function(_result){
-        //         if(_result.status && _result.data.result.n === 1){
-        //             res.send(apiResult(true,_result.data));
-        //         }else{
-        //             console.log('fail')
-        //             res.send(apiResult(false,_result.data));
-        //         }
-        //     });
-        // });
-        // app.post('/upUser',function(req,res){
-        //     db.upload('user',req.body,function(_result){
-        //         if(_result.status && _result.data.result.n === 1){
-        //             console.log('ok');
-        //             res.send(apiResult(true,_result.data));
-        //         }else{
-        //             console.log('fail')
-        //             res.send(apiResult(false,_result.data));
-        //         }
-        //     })
-        // });
-        /*-------------------------------登录时验证token--------------*/
-
-        // app.post("/index",function(req,res){
-   
-        //     var token = req.headers.authorization;
-        //     //console.log(req.headers)
-        //     jwt.verify(token,"secret",function(error,result){
-        //         if(error){
-        //             res.send(error);
-        //         }else{
-        //             res.send(result);
-        //         }
-        //     })
-        // });
+        
     }
 }

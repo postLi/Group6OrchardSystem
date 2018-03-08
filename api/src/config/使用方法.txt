@@ -4,3 +4,4 @@ filterCols:过滤数据让其不显示,
 dictionary:词典(中英文转换)
 multiple:是否多选(true为多选，默认为单选)
 filterData:数据处理
+redactApi:编辑请求api

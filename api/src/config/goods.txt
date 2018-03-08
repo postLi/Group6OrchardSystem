@@ -20,5 +20,9 @@
             "format":"yyyy年MM月dd日 hh:mm:ss"
         }
     },
+    "search":{
+        "show":true,
+        "api":"config/goodssearch.txt"
+    },
     "goodsRedact":"config/goodsredact.txt"
 }

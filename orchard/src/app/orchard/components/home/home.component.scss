@@ -17,6 +17,9 @@
         }
     }
 }
+.nav-text{
+  font-size:14px;
+}
 :host ::ng-deep .logo_img {
     height: 200px;
     background-color: #10a2e9;
@@ -25,6 +28,33 @@
 .ant-layout-header{
     height:60px;
     position:relative;
+}
+
+.my{
+    position:absolute;
+    right:-60px;
+    top:70%;
+    transform:translate(-50%,-50%);
+    height:60px;
+    width:150px;
+    img{
+      position:absolute;
+      top:0px;
+      right:160px;
+        width:40px;
+        height:40px;
+        border-radius: 50%;
+        
+    }
+    font-size:14px;
+    font-weight:600;
+}
+.ht_admin{
+  font-weight:600;
+  display:inline-block;
+  height:60px;
+  line-height:60px;
+  font-size:16px;
 }
 .dd{
     background:#2a6cc3;
@@ -40,7 +70,8 @@
 }
 .select{
     position:absolute;
-    right:80px;
+    width:100px;
+    right:200px;
     top:50%;
     transform:translate(-50%,-50%);
 }

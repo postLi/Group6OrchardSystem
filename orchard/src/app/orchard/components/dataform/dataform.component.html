@@ -1,10 +1,10 @@
 <div class="c-content-inner">
     <form>
-        <div class="row" *ngIf = "!redact">
+        <div class="row" *ngIf = "!seach">
             <div class="col-md-6" *ngFor="let col of colsConfig">
                 <div class="form-group row">
                     <label class="col-md-3 col-form-label text-right">{{privateDic[common.lanType] && privateDic[common.lanType][col] ? privateDic[common.lanType][col] : common.publicDic[common.lanType][col] || col}}</label>
-                    <div class="col-md-9" *ngIf="!colsAttributes[col]">
+                    <div class="col-md-7" *ngIf="!colsAttributes[col]">
                         <input type="text" class="form-control" [(ngModel)] = 'Dataset[col]' [name]="col">
                     </div>  
                     <div *ngIf="colsAttributes[col]" [ngSwitch]="colsAttributes[col].type">
@@ -25,8 +25,31 @@
                 <button type="button" class="btn btn-primary" (click)= 'queding()'>确定</button>
             </div>
         </div>
+        <div class="c-content-inner search" *ngIf = 'seach'>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="c-line-title">条件查询</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" *ngFor="let col of colsConfig">
+                    <div class="form-group row" >
+                        <label class="col-md-3 col-form-label text-right">{{privateDic[common.lanType] && privateDic[common.lanType][col] ? privateDic[common.lanType][col] : common.publicDic[common.lanType][col] || col}}</label>
+                        <div class="col-md-9" *ngIf="!colsAttributes[col]">
+                            <input type="text" class="form-control" [(ngModel)] = 'Dataset[col]' [name]="col">
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-primary" (click) = "search()"><i class="fa fa-search fa-fw"></i> 查询</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
-<!-- <div class="jg">
-    <alert  [dismissible]="dismissible">成功</alert>
+
+<!-- <div *ngIf='1==1' class = "alert">
+    <p class = "alert-success"><span>加入成功</span><span class="sc" (click) = "none()">&times;</span></p>
 </div> -->

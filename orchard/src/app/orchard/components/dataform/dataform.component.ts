@@ -24,9 +24,23 @@ export class DataformComponent implements OnInit {
 	redactShow:boolean;
 	Dataset:Object={};
     addApi:string;
+    searchApi:String;
+    seach:boolean = false;
 	@Output() parentAttr = new EventEmitter<Boolean>();
+    @Output() searchAttr = new EventEmitter<any>();
 	constructor(private http: HttpService, private common: CommonService) { }
-
+    dismissible = true;
+      alerts: any = [
+        {
+          type: 'success',
+          msg: `加入成功`
+        },
+        {
+          type: 'danger',
+          msg: `失败`
+        }
+      ];
+ 
 	ngOnInit() {
         if(this.currentDataset){
             this.Dataset = this.currentDataset;  
@@ -36,9 +50,15 @@ export class DataformComponent implements OnInit {
 			this.colsConfig = configRes['cols'].split(',');
 			this.colsAttributes = configRes['colsAttributes'] || {};
 
+            console.log(this.api)
+
             //添加接口
             this.addApi = configRes['api'] || configRes['redactApi'];
-            console.log(configRes)
+            console.log(configRes['searchApi'])
+            if(configRes['searchApi']){
+                this.searchApi = configRes['searchApi'];
+                this.seach = true;
+            }
 
 			for(let item in this.colsAttributes){
 				if(this.colsAttributes[item]['type'] == 'select-api'){	
@@ -61,7 +81,7 @@ export class DataformComponent implements OnInit {
         for(var attr in this.Dataset){
             params[attr] = this.Dataset[attr];
         }
-       
+        
         this.http.post(this.addApi,params).then((res) => {
             console.log(res)
             if(res['status']){
@@ -70,12 +90,29 @@ export class DataformComponent implements OnInit {
                     this.Dataset = {};
                 }else if(this.addApi =='updatagoods'){
                      alert('修改成功');
+                }else{
+                   alert('成功'); 
                 }
             }else{
                 alert('填完信息');
             }
             
         })
+    }
+    search(){
+        let params = {};
+        for(var attr in this.Dataset){
+            params[attr] = this.Dataset[attr];
+        }
+        this.searchAttr.emit({searchApi:this.searchApi,params:params});
+        // this.http.get(this.searchApi,params).then((res) => {
+        //     console.log(this.searchAttr)
+        //     this.searchAttr.emit(res);
+               
+        // })
 
+    }
+    none(){
+        console.log(this)
     }
 }

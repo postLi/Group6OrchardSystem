@@ -1,11 +1,11 @@
 <div *ngIf="dataset" class = 'c-content-inner alltabel' >
-   <!--  <div *ngIf="searchConfig.show">
-        <dataform [api]="searchConfig.api"></dataform>
-    </div> -->
+    <div *ngIf="searchConfig.show">
+        <dataform [api]="searchConfig.api" (searchAttr)="searchEvent($event)"></dataform>
+    </div>
     <table class="table table-bordered">
         <thead>
             <tr class="text-center">
-                <th *ngIf="multiple"><input type="checkbox" [checked]="currentTrIndexs.length == dataset.length" (click)="selectAll()" class="text-center" nz-checkbox></th>
+                <th *ngIf="multiple"><input type="checkbox" class = "checkbox"[checked]="currentTrIndexs.length == dataset.length" (click)="selectAll()" class="text-center"></th>
                 <ng-template ngFor let-key [ngForOf]="getKeys(dataset[0])" >
                     <th *ngIf="(!columns[0] || columns.indexOf(key) > -1) && filterColumns.indexOf(key) < 0" class="text-center">{{privateDic[common.lanType] && privateDic[common.lanType][key] ? privateDic[common.lanType][key] : common.publicDic[common.lanType][key] || key}}</th>
                 </ng-template>
@@ -37,7 +37,8 @@
 </div>
 <div class = 'tc' *ngIf="redactShow">
     <div class="shade">
-        <dataform [api] = "goodsredact" (parentAttr)="parentEvent($event)" [currentDataset] = 'currentDataset' [id] = "currentId"></dataform> 
+        <h5>详情</h5>
+        <dataform [api] = "goodsredact" (parentAttr)="parentEvent($event)"  [currentDataset] = 'currentDataset' [id] = "currentId"></dataform> 
     </div>
 </div>
 

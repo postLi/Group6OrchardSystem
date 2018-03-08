@@ -1,3 +1,4 @@
 {
-    "cols":"nickname,password,username,email"
+    "cols":"username,password,phone,email",
+    "api":"adduser"
 }   

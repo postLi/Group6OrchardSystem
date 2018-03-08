@@ -1,16 +1,20 @@
 {
     "api":"getuser",
-    "cols":"username,password,date,nickname,email",
+    "redactApi":"updatauser",
+    "delapi":"deluser",
+    "cols":"username,date,email,phone,email",
     "filterCols":"id,address,password",
     "dictionary":{
         "en":{
             "email":"E-mail",
-            "nickname":"NickName"
+            "nickname":"NickName",
+            "phone":"Phone"
         },
         "cn":{
             "date":"注册时间",
             "email":"邮箱",
-            "nickname":"昵称"
+            "nickname":"昵称",
+            "phone":"手机号"
         }
     },
     "multiple":"true",
@@ -19,10 +23,15 @@
             "type":"DateFormat",
             "format":"yyyy年MM月dd日 hh:mm:ss"
         },
-        "username":{
+        "phone":{
             "type":"Replace",
             "reg":"(\\d{3}).+(\\d{4})",
             "replaceVal":"$1****$2"
+        },
+        "username":{
+            "type":"Replace",
+            "reg":"(.).+",
+            "replaceVal":"$1**"
         },
         "nickname":{
             "type":"Replace",
