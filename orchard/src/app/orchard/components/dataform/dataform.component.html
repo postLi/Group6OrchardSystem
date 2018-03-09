@@ -7,14 +7,20 @@
                     <div class="col-md-7" *ngIf="!colsAttributes[col]">
                         <input type="text" class="form-control" [(ngModel)] = 'Dataset[col]' [name]="col">
                     </div>  
-                    <div *ngIf="colsAttributes[col]" [ngSwitch]="colsAttributes[col].type">
+                    <div *ngIf="colsAttributes[col]" [ngSwitch]="colsAttributes[col].type" class="col-md-7">
                         <select *ngSwitchCase="'select'">
                             <option [value]="obj.value" [selected]="obj.value == colsAttributes[col].defaultvalue" *ngFor="let obj of colsAttributes[col].data">{{obj.text}}</option>
                         </select>
-                        <select *ngSwitchCase="'select-api'">
+                        <select *ngSwitchCase="'select-api'" [(ngModel)] = "store.selectValue" name = "1" class="form-control select">
                             <ng-template ngFor let-obj [ngForOf]="selectApiDataSet[col]">
                                     <option [value]="obj[colsAttributes[col].match.value]" *ngIf="obj[colsAttributes[col].match.value] == colsAttributes[col].defaultvalue" selected>{{obj[colsAttributes[col].match.text]}}</option>
                                     <option [value]="obj[colsAttributes[col].match.value]" *ngIf="obj[colsAttributes[col].match.value] != colsAttributes[col].defaultvalue">{{obj[colsAttributes[col].match.text]}}</option>
+                            </ng-template>
+                        </select> 
+                        <select *ngSwitchCase="'select-small-api'" [(ngModel)] = "store.smallValue" name = "2" class="form-control select">
+                            <ng-template ngFor let-obj [ngForOf]="smallAttributes[col]">
+                                    <option [value]="obj[colsAttributes[col].match.value]" *ngIf="obj[colsAttributes[col].match.value] == colsAttributes[col].defaultvalue && obj[colsAttributes[col].match.bigtype] == store.selectValue" selected>{{obj[colsAttributes[col].match.text]}}</option>
+                                    <option [value]="obj[colsAttributes[col].match.value]" *ngIf="obj[colsAttributes[col].match.value] != colsAttributes[col].defaultvalue && obj[colsAttributes[col].match.bigtype] == store.selectValue">{{obj[colsAttributes[col].match.text]}}</option>
                             </ng-template>
                         </select>           
                     </div>
@@ -50,6 +56,12 @@
     </form>
 </div>
 
-<!-- <div *ngIf='1==1' class = "alert">
-    <p class = "alert-success"><span>加入成功</span><span class="sc" (click) = "none()">&times;</span></p>
-</div> -->
+<div *ngIf='success' class = "alert">
+    <p class = "alert-success"><span>成功</span><span class="sc" (click) = "none()">&times;</span></p>
+</div>
+<div *ngIf='error' class = "alert">
+    <p class = "alert-error"><span>失败</span><span class="sc" (click) = "none()">&times;</span></p>
+</div>
+<div *ngIf='warn' class = "alert">
+    <p class = "alert-warn"><span>请完善与核对信息</span><span class="sc" (click) = "none()">&times;</span></p>
+</div>

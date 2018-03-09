@@ -47,4 +47,14 @@
       </nz-alert>
 </nz-spin>
 
+<div *ngIf='success' class = "alert">
+    <p class = "alert-success"><span>成功</span><span class="sc" (click) = "none()">&times;</span></p>
+</div>
+<div *ngIf='error' class = "alert">
+    <p class = "alert-error"><span>失败</span><span class="sc" (click) = "none()">&times;</span></p>
+</div>
+<div *ngIf='warn' class = "alert">
+    <p class = "alert-warn"><span>请完善与核对信息</span><span class="sc" (click) = "none()">&times;</span></p>
+</div>
+
 

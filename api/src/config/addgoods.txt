@@ -1,4 +1,20 @@
 {
-    "cols":"bigtypeid,smalltypeid,title,describes,price,saleprice,qty",
-    "api":"addgoods"
+    "cols":"bigtypeid,smalltypeid,title,describes,price,qty",
+    "api":"addgoods",
+    "colsAttributes":{
+        "gender":{
+            "type":"select",
+            "data":[{"value":"1","text":"男"},{"value":"0","text":"女"}]
+        },
+        "bigtypeid":{
+            "type":"select-api",
+            "api":"findbigtype",
+            "match":{"value":"id","text":"type"}
+        },
+        "smalltypeid":{
+            "type":"select-small-api",
+            "api":"findsmalltype",
+            "match":{"value":"id","text":"type","bigtype":"bigtypeid"}
+        }
+    }
 } 

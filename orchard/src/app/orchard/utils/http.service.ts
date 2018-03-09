@@ -4,9 +4,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class HttpService{
     constructor( private http: Http ) { }
-    private baseUrl: string = 'http://10.3.131.131:8080/';
+    private baseUrl: string = 'http://10.3.132.48:8080/';
     private getUrl(_url){
-        console.log(_url)
         if (_url.startsWith('http')){
             return _url;
         }
@@ -25,7 +24,6 @@ export class HttpService{
     }
     
     post(api,params={}){
-        console.log(api)
         return new Promise((resolve,reject)=>{
             function str( data )
             {

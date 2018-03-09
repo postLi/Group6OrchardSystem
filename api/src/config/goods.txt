@@ -3,7 +3,7 @@
     "delapi":"delgoods",
     "redactApi":"updatagoods",
     "cols":"*",
-    "filterCols":"id,bigtypeid,smalltypeid,detailsimg,mainimg,hot",
+    "filterCols":"id,bigtypeid,smalltypeid,detailsimg,mainimg,hot,saleprice",
     "dictionary":{
         "en":{},
         "cn":{

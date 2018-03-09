@@ -11,7 +11,9 @@
         "password":"Password",
         "email":"E-mail",
         "nickname":"NickName",
-        "phone":"Phone"
+        "phone":"Phone",
+        "bigtypeid":"BigType",
+        "smalltypeid":"SmallType"
     },
     "cn":{
         "title":"名称",
@@ -25,7 +27,9 @@
         "password":"密码",
         "email":"邮箱",
         "nickname":"昵称",
-        "phone":"手机号"
+        "phone":"手机号",
+        "bigtypeid":"总类",
+        "smalltypeid":"分类"
     }
     
 }

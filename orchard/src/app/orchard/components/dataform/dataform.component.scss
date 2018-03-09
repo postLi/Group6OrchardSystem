@@ -36,7 +36,7 @@
 }
 .alert{
     position:absolute;
-    top:50px;
+    top:15px;
     left:50%;
     height:50px;
     width:400px;
@@ -60,5 +60,16 @@
     background-color: #4dbd74 !important;
     color:#fff !important;
 }
+.alert-error{
+    background-color: #f86c6b !important;
+    color:#fff !important;
+}
+.alert-warn{
+    background-color: #f0bd0a !important;
+    color:#fff !important;
+}
+// .select{
+//     width:200px;
+// }
 
 

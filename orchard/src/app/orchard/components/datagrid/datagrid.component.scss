@@ -83,3 +83,38 @@
     background-color: rgba(158, 158, 158, 0.14);
     
 }
+
+.alert{
+    position:absolute;
+    top:15px;
+    left:50%;
+    height:50px;
+    width:400px;
+    
+    transform:translate(-50%,-50%);
+    >p{
+        border-radius:20px;
+        height:30px;
+        padding:0 10px;
+        line-height:30px;
+        font-size:16px;
+        position:relative;
+        .sc{
+            position:absolute;
+            right:20px;
+        }
+
+    }
+}
+.alert-success{
+    background-color: #4dbd74 !important;
+    color:#fff !important;
+}
+.alert-error{
+    background-color: #f86c6b !important;
+    color:#fff !important;
+}
+.alert-warn{
+    background-color: #f0bd0a !important;
+    color:#fff !important;
+}

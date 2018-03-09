@@ -1,3 +1,4 @@
 export default{
-	lanType:'en'
+    selectValue :"1",
+    smallValue:"1"
 } 

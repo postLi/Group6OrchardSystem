@@ -43,7 +43,9 @@ export class DataGridComponent implements OnInit{
     //     this.currentPage = pageNo;
     // }
     
-
+    success:boolean = false;
+    warn:boolean = false;
+    error:boolean = false;
 
     constructor(private common: CommonService,private http: HttpService){}
 
@@ -72,7 +74,6 @@ export class DataGridComponent implements OnInit{
             
             //搜索
             this.searchConfig = configRes['search'] || {};
-            console.log(this.searchConfig)
 
             //编辑
             this.redactApi = configRes['redactApi'] || {};
@@ -96,19 +97,17 @@ export class DataGridComponent implements OnInit{
             pageParams['page'] = _page;
             pageParams['search'] = this.searchData || {};
         }     
-        console.log(pageParams)   
+        
         //配置信息中的 api
         this.http.get(this.apiConfig, pageParams).then((apiRes) => {
             this.loging = false;
             this.dataset = apiRes['data'].results[0];
+            console.log(this.dataset)
             this.rowsCount = apiRes['data'].results[1][0].rowscount;
-            console.log(this.rowsCount,apiRes)
             this.totalItems =  this.rowsCount;
-            console.log(this.totalItems)
             let pageItems = this.paginationConfig['pageitems'];
             this.itemsPerPage = pageItems;
             this.pageCount = Math.ceil(this.rowsCount / pageItems);
-            console.log(this.pageCount)
              
         })
     }
@@ -146,10 +145,8 @@ export class DataGridComponent implements OnInit{
         this.redactShow = val;
     }
     searchEvent(_data){
-        console.log(_data) 
         this.apiConfig = _data.searchApi;
         this.searchData = _data.params; 
-        console.log(this.searchData)
         this.apiRequest();
 
         // console.log(data)
@@ -185,9 +182,7 @@ export class DataGridComponent implements OnInit{
         // console.log(this.currentDataset)
        
         let _id = this.dataset[idx].id;
-        this.currentId = _id;
-
-  
+        this.currentId = _id; 
     }
     del(idx){
         let id = this.dataset[idx].id;
@@ -196,7 +191,10 @@ export class DataGridComponent implements OnInit{
         this.http.post(this.delapi,params).then((res)=>{
             if(res['status']){
                 this.dataset.splice(idx,1)
-
+                this.success = true; 
+                    setTimeout(()=>{
+                       this.success = false;   
+                }, 1000);
                 if(this.dataset.length==0){
                     let currentPage;
                     if(this.Page>1){  

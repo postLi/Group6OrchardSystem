@@ -6,12 +6,13 @@ module.exports = {
         app.get('/getAll',function(req, res){
             let pageItems = req.query.pageitems;
             let page = req.query.page;
-            let sql = `
-                select 
-                    SQL_CALC_FOUND_ROWS                         
-                    *    
+            let sql = `select 
+                    SQL_CALC_FOUND_ROWS 
+                    s.type,
+                    g.*
                 from
-                    goods`;
+                    goods g
+                    inner join smalltype s on s.id = g.smalltypeid`;
                    
             if(page && pageItems) {
                 sql += ` limit ${(page-1) * pageItems}, ${pageItems}`;
@@ -58,12 +59,11 @@ module.exports = {
             var smalltypeid = req.body.smalltypeid;
             var title = req.body.title;
             var qty = req.body.qty;
-            var saleprice = req.body.saleprice;
-            var describes = req.body.describes;
+           
+            var describes = req.body.describes || '';
             var price = req.body.price;
-            var data = req.body.data;
             let sql = `
-                insert into goods (bigtypeid,smalltypeid,title,qty,saleprice,describes,price) values (${bigtypeid},${smalltypeid},'${title}',${qty},${saleprice},'${describes}',${price})`
+                insert into goods (bigtypeid,smalltypeid,title,qty,describes,price) values (${bigtypeid},${smalltypeid},'${title}',${qty},'${describes}',${price})`
             db.insert(sql,function(data){
                 res.send(data)
             })
@@ -90,6 +90,35 @@ module.exports = {
             sql += ";select FOUND_ROWS() as rowscount;";
             db.select(sql, function(data){
                 console.log(data)
+                res.send(data);          
+            })
+        })
+
+        //大类别
+        app.get('/findbigtype',function(req, res){
+            let bigid = req.query.id;
+            console.log(bigid)
+            let sql = `
+                select 
+                                 
+                    *    
+                from
+                    bigtype`;
+
+            db.select(sql, function(data){
+                res.send(data);          
+            })
+        })
+        app.get('/findsmalltype',function(req, res){
+            
+            let sql = `
+                select                 
+                    *    
+                from
+                    smalltype
+                `;
+                   
+            db.select(sql, function(data){
                 res.send(data);          
             })
         })
