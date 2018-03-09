@@ -13,7 +13,9 @@
         "nickname":"NickName",
         "phone":"Phone",
         "bigtypeid":"BigType",
-        "smalltypeid":"SmallType"
+        "smalltypeid":"SmallType",
+        "type":"Type",
+        "position":"Position"
     },
     "cn":{
         "title":"名称",
@@ -29,7 +31,9 @@
         "nickname":"昵称",
         "phone":"手机号",
         "bigtypeid":"总类",
-        "smalltypeid":"分类"
+        "smalltypeid":"分类",
+         "type":"类别",
+         "position":"职位"
     }
     
 }

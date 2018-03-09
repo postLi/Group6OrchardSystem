@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
 
     }
     verify(){
-        console.log(66)
         let params = {};
 
         params['username'] = this.username;
@@ -65,7 +64,7 @@ export class LoginComponent implements OnInit {
         }else{
             this.loging = true;
             this.http.get('login',params).then((res)=>{
-                
+                let position = res['data'].results[0].position
                 let len = res['data'].results.length;
                 if(len==0){
                     this.error();
@@ -73,7 +72,7 @@ export class LoginComponent implements OnInit {
                 }else{
                     console.log(this.username)
                     window.sessionStorage.setItem("username",this.username);
-                    
+                    window.sessionStorage.setItem("position",position);
                     this.loging = false;
                     this.router.navigate(["/allgoods"]);
                 }

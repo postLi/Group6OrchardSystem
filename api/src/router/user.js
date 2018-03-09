@@ -36,8 +36,9 @@ module.exports = {
             var username = req.body.username;
             var password = req.body.password;
             var email = req.body.email;
+            var position = req.body.position;
             let sql = `
-                insert into admin (phone,username,password,email) values ('${phone}','${username}','${password}','${email}')`
+                insert into admin (phone,username,password,email,position) values ('${phone}','${username}','${password}','${email}','${position}')`
             db.insert(sql,function(data){
                 res.send(data)
             })

@@ -2,7 +2,7 @@
     "api":"getuser",
     "redactApi":"updatauser",
     "delapi":"deluser",
-    "cols":"username,date,email,phone,email",
+    "cols":"username,position,phone,date",
     "filterCols":"id,address,password",
     "dictionary":{
         "en":{

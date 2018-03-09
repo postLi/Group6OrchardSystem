@@ -42,7 +42,7 @@ export class DataGridComponent implements OnInit{
     // setPage(pageNo: number): void {
     //     this.currentPage = pageNo;
     // }
-    
+    position:string;
     success:boolean = false;
     warn:boolean = false;
     error:boolean = false;
@@ -51,6 +51,7 @@ export class DataGridComponent implements OnInit{
 
     ngOnInit(){
         this.loging = true;
+        this.position = window.sessionStorage.getItem('position');
         //获取当前模块的配置
         this.http.get(this.config).then((configRes) => {
             this.loging = false;
@@ -102,7 +103,7 @@ export class DataGridComponent implements OnInit{
         this.http.get(this.apiConfig, pageParams).then((apiRes) => {
             this.loging = false;
             this.dataset = apiRes['data'].results[0];
-            console.log(this.dataset)
+            // console.log(this.dataset)
             this.rowsCount = apiRes['data'].results[1][0].rowscount;
             this.totalItems =  this.rowsCount;
             let pageItems = this.paginationConfig['pageitems'];
@@ -149,11 +150,6 @@ export class DataGridComponent implements OnInit{
         this.searchData = _data.params; 
         this.apiRequest();
 
-        // console.log(data)
-        // this.dataset = data['data'].results[0];
-        // console.log(this.dataset)
-        //  this.rowsCount = data['data'].results[1][0].rowscount;
-
     }
 
     filterData(_key, _val){
@@ -177,35 +173,46 @@ export class DataGridComponent implements OnInit{
     }
     //编辑
     redact(idx){
-        this.redactShow = true;
-        this.currentDataset = this.dataset[idx];
-        // console.log(this.currentDataset)
-       
-        let _id = this.dataset[idx].id;
-        this.currentId = _id; 
+        if(this.position == '员工'){
+            console.log(this.position)
+            alert('您无此操作');
+        }else{
+
+            this.redactShow = true;
+            this.currentDataset = this.dataset[idx];
+            // console.log(this.currentDataset)
+           
+            let _id = this.dataset[idx].id;
+            this.currentId = _id; 
+        }
     }
     del(idx){
-        let id = this.dataset[idx].id;
-        let params = {};
-        params['id'] = id;
-        this.http.post(this.delapi,params).then((res)=>{
-            if(res['status']){
-                this.dataset.splice(idx,1)
-                this.success = true; 
-                    setTimeout(()=>{
-                       this.success = false;   
-                }, 1000);
-                if(this.dataset.length==0){
-                    let currentPage;
-                    if(this.Page>1){  
-                        currentPage = Number(this.Page)-1;    
-                    }else{
-                        currentPage = Number(this.Page)+1
+        if(this.position == '员工'){
+            console.log(this.position)
+            alert('您无此操作');
+        }else{ 
+            let id = this.dataset[idx].id;
+            let params = {};
+            params['id'] = id;
+            this.http.post(this.delapi,params).then((res)=>{
+                if(res['status']){
+                    this.dataset.splice(idx,1)
+                    this.success = true; 
+                        setTimeout(()=>{
+                           this.success = false;   
+                    }, 1000);
+                    if(this.dataset.length==0){
+                        let currentPage;
+                        if(this.Page>1){  
+                            currentPage = Number(this.Page)-1;    
+                        }else{
+                            currentPage = Number(this.Page)+1
+                        }
+                        this.apiRequest(currentPage);
                     }
-                    this.apiRequest(currentPage);
                 }
-            }
-             
-        })
+                 
+            })
+        }
     }
 }
