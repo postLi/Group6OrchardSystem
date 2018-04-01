@@ -16,7 +16,8 @@
             <tr *ngFor="let obj of dataset; let idx = index,let even = even;"[class.even]= 'even' [class.active]="currentTrIndexs.indexOf(idx) > -1"  class="text-center">
                 <td *ngIf="multiple"><input type="checkbox"(click)="selectTr(idx)" [checked]="currentTrIndexs.indexOf(idx) > -1"></td>
                 <ng-template ngFor let-key [ngForOf]="getKeys(obj)">
-                    <td *ngIf="(!columns[0] || columns.indexOf(key) > -1) &&  filterColumns.indexOf(key) < 0">{{filterData(key, obj[key])}}</td>
+                    <td *ngIf="(!columns[0] || columns.indexOf(key) > -1) &&  filterColumns.indexOf(key) < 0 && key!= 'mainimg'">{{filterData(key, obj[key])}}</td>
+                    <td *ngIf="(!columns[0] || columns.indexOf(key) > -1) &&  filterColumns.indexOf(key) < 0 && key=='mainimg'"><img [src]="filterData(key, obj[key])" alt="" /></td>
                 </ng-template>
                 <td class="text-center">
                     <button class="btn btn-success btn-sm" (click)='redact(idx)'><i class="fa fa-pencil fa-fw"></i> 编辑</button>

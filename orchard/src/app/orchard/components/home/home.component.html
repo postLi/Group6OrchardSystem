@@ -27,7 +27,6 @@
         <nz-header style="background: #fff; padding:0;">
             <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
             <span class = 'ht_admin'>后台管理系统</span>
-           <!--  <span class = "my"><img src="../../../../assets/img/user-header.png" alt="" />{{username}}</span> -->
             <div class="btn-group my" dropdown >
                 <img src="../../../../assets/img/user-header.png">
                 
@@ -41,36 +40,16 @@
                     </ul>
                     
             </div>
-            <!-- <span class = "exit" (click)="exit()" ><i class="anticon anticon-poweroff"></i>退出</span> -->
-           <!--  <div class = "exit">
-                <button class="dropdown-item" (click)="userInfo()"><i class="fa  fa-user-circle-o  fa-fw"></i> 个人资料</button>
-                <button class="dropdown-item" (click)="passwordEdit()"><i class="fa  fa-key fa-fw"></i> 修改密码</button>
-                <button class="dropdown-item" (click)="exitSys()"><i class="fa  fa-sign-out fa-fw"></i> 退出系统</button> 
-            </div> -->
                    
             <select [(ngModel)]="common.lanType"  class="form-control select">
                 <option value="en">English</option>
                 <option value="cn">中文</option>
             </select>   
         </nz-header>
-        <div class="c-header-profile">
-            <div ngbDropdown>
-               <!--  <img alt="image" class="rounded-circle" [src]="mainData.userData.userAvatar" (click)="avatarReplacement()"/> -->
-                <div class="c-user-profile">
-                    <!-- <span ngbDropdownToggle>{{mainData.userData.userName}}</span> -->
-                </div>
-                <div ngbDropdownMenu  class="dropdown-menu animated fadeIn">
-                    <button class="dropdown-item" (click)="userInfo()"><i class="fa  fa-user-circle-o  fa-fw"></i> 个人资料</button>
-                    <button class="dropdown-item" (click)="passwordEdit()"><i class="fa  fa-key fa-fw"></i> 修改密码</button>
-                    <button class="dropdown-item" (click)="exitSys()"><i class="fa  fa-sign-out fa-fw"></i> 退出系统</button>
-                </div>
-            </div>
-        </div>
         <nz-content style="margin:16px;">
             <div style="padding:24px; background: #fff; min-height: 650px;">
                 <router-outlet></router-outlet> 
             </div>
         </nz-content>
-       <!--  <nz-footer style="text-align: center;"></nz-footer> -->
     </nz-layout>
 </nz-layout>

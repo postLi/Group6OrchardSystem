@@ -10,7 +10,6 @@ import {CommonService} from '../../utils/common.service'
 	styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-		lanType: string = "en";
 		isCollapsed = false;
 		username:string;
 		constructor(private router: Router,private common: CommonService) { }

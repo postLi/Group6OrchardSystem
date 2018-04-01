@@ -91,6 +91,7 @@ export class DataformComponent implements OnInit {
         this.parentAttr.emit(this.redactShow);
     }
     queding(){
+
         this.redactShow = false;
         this.parentAttr.emit(this.redactShow);
         let params = {};
@@ -101,11 +102,11 @@ export class DataformComponent implements OnInit {
         params['smalltypeid'] = this.store['smallValue'];
        
         this.http.post(this.addApi,params).then((res) => {
-           
+            console.log(res)
             if(res['status']){
-                if(this.addApi=='addgoods'){
-                  
+                if(this.addApi=='addgoods'){     
                     this.success = true; 
+                    console.log(this.success)
                     setTimeout(()=>{
                        this.success = false;   
                     }, 1000);
@@ -116,6 +117,11 @@ export class DataformComponent implements OnInit {
                     setTimeout(()=>{
                        this.success = false;   
                     }, 1000);
+                }else if(res['data'].results.length>0){
+                    this.error = true; 
+                    setTimeout(()=>{
+                       this.error = false;   
+                    }, 1000);
                 }else{
                     this.success = true; 
                     setTimeout(()=>{
@@ -125,6 +131,7 @@ export class DataformComponent implements OnInit {
                 }
             }else{
                 this.warn = true; 
+                console.log(this.warn)
                     setTimeout(()=>{
                        this.warn = false;   
                 }, 1000);

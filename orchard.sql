@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : localhost_3306
  Source Server Type    : MySQL
  Source Server Version : 50714
  Source Host           : localhost:3306
@@ -11,11 +11,38 @@
  Target Server Version : 50714
  File Encoding         : 65001
 
- Date: 03/03/2018 14:26:33
+ Date: 11/03/2018 17:54:47
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for admin
+-- ----------------------------
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `position` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NULL DEFAULT NULL,
+  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NULL DEFAULT NULL,
+  `date` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of admin
+-- ----------------------------
+INSERT INTO `admin` VALUES (23, '111', '1111', '111111111111111', NULL, '员工', NULL, '2018-03-11 16:36:38');
+INSERT INTO `admin` VALUES (22, '111', '1111', '111111111111111', NULL, '员工', NULL, '2018-03-11 16:33:40');
+INSERT INTO `admin` VALUES (21, '112', '111', '13311111111', NULL, '员工', NULL, '2018-03-11 16:25:29');
+INSERT INTO `admin` VALUES (20, '111', '111', '13331111111', NULL, '员工', NULL, '2018-03-11 16:24:31');
+INSERT INTO `admin` VALUES (19, 'admin', 'admin', '13211111111', NULL, '经理', NULL, '2018-03-11 16:24:13');
+INSERT INTO `admin` VALUES (24, '111', '111', '111', NULL, '111', NULL, '2018-03-11 16:36:47');
+INSERT INTO `admin` VALUES (25, '3333', '3333', 'undefined', NULL, 'undefined', NULL, '2018-03-11 16:50:37');
 
 -- ----------------------------
 -- Table structure for bigtype
@@ -48,13 +75,13 @@ INSERT INTO `bigtype` VALUES (11, '果园周边', '2017-05-17 00:00:00');
 -- ----------------------------
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) NULL DEFAULT NULL,
   `gid` int(11) NULL DEFAULT NULL,
   `num` int(11) NULL DEFAULT NULL COMMENT '数量',
   `date` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Records of cart
@@ -70,7 +97,7 @@ CREATE TABLE `goods`  (
   `bigtypeid` int(11) NULL DEFAULT NULL,
   `smalltypeid` int(11) NULL DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `describe` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NULL DEFAULT NULL COMMENT '描述',
+  `describes` varchar(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NULL DEFAULT NULL COMMENT '描述',
   `price` decimal(10, 2) NULL DEFAULT NULL,
   `saleprice` decimal(10, 2) NULL DEFAULT NULL,
   `saleqty` int(11) NULL DEFAULT NULL,
@@ -80,15 +107,11 @@ CREATE TABLE `goods`  (
   `qty` int(11) NULL DEFAULT NULL,
   `date` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 254 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 306 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES (1, 1, 1, '佳沛意大利金奇异果 12个', '当季金果 甜滋水润', 100.00, 88.00, 200, 'y', 'https://imgqn8.fruitday.com/images/product_pic/4449/1/1-270x270-4449-XP99U2K9.jpg', 'https://imgqn8.fruitday.com/images/product_pic/4449/1/1-270x270-4449-XP99U2K9.jpg,https://imgjd1.fruitday.com/images/product_pic/2066/1/1-270x270-2066-55F664F8.jpg,https://imgqn8.fruitday.com/images/product_pic/36/1/1-270x270-36-PWFA3B5F.jpg', 13, '2018-03-02 12:11:00');
-INSERT INTO `goods` VALUES (2, 1, 1, '佳沛意大利金奇异果 6个', '当季金果 甜滋水润', 101.00, 89.00, 200, 'y', 'https://imgjd4.fruitday.com/images/product_pic/4449/1/1-270x270-4449-XP99U2K9.jpg', 'https://imgqn8.fruitday.com/images/product_pic/4449/1/1-270x270-4449-XP99U2K9.jpg,https://imgjd1.fruitday.com/images/product_pic/2066/1/1-270x270-2066-55F664F8.jpg,https://imgqn8.fruitday.com/images/product_pic/36/1/1-270x270-36-PWFA3B5F.jpg', 14, '2018-03-03 12:11:00');
-INSERT INTO `goods` VALUES (3, 1, 1, '佳沛意大利绿奇异果（原箱） 36个', '细嫩绿芯 酸甜爽口', 102.00, 90.00, 200, 'n', 'https://imgjd1.fruitday.com/images/product_pic/2066/1/1-270x270-2066-55F664F8.jpg', 'https://imgjd1.fruitday.com/images/product_pic/2066/1/1-270x270-2066-55F664F8.jpg,https://imgqn8.fruitday.com/images/product_pic/4449/1/1-270x270-4449-XP99U2K9.jpg', 15, '2018-03-04 12:11:00');
-INSERT INTO `goods` VALUES (4, 1, 1, '佳沛意大利绿奇异果 12个', '细嫩绿芯 酸甜爽口', 103.00, 91.00, 200, 'n', 'https://imgqn8.fruitday.com/images/product_pic/36/1/1-270x270-36-PWFA3B5F.jpg', 'https://imgqn8.fruitday.com/images/product_pic/36/1/1-270x270-36-PWFA3B5F.jpg,https://imgjd1.fruitday.com/images/product_pic/2066/1/1-270x270-2066-55F664F8.jpg,https://imgqn8.fruitday.com/images/product_pic/4449/1/1-270x270-4449-XP99U2K9.jpg', 16, '2018-03-05 12:11:00');
 INSERT INTO `goods` VALUES (5, 1, 1, '佳沛意大利绿奇异果 6个', '细嫩绿芯 酸甜爽口', 104.00, 92.00, 200, 'n', 'https://imgjd7.fruitday.com/images/product_pic/36/1/1-270x270-36-PWFA3B5F.jpg', 'https://imgjd7.fruitday.com/images/product_pic/36/1/1-270x270-36-PWFA3B5F.jpg,https://imgjd7.fruitday.com/images/product_pic/36/1/1-270x270-36-PWFA3B5F.jpg', 17, '2018-03-06 12:11:00');
 INSERT INTO `goods` VALUES (6, 1, 2, '美国华盛顿甜脆红地厘蛇果 6个', '经典红果 甜脆出众', 105.00, 93.00, 200, 'n', 'https://imgqn9.fruitday.com/images/product_pic/52/1/1-270x270-52-HF73PYWP.jpg', 'https://imgqn9.fruitday.com/images/product_pic/52/1/1-270x270-52-HF73PYWP.jpg,https://imgjd3.fruitday.com/images/product_pic/46/1/1-270x270-46-CUDTC1KY.jpg', 18, '2018-03-07 12:11:00');
 INSERT INTO `goods` VALUES (7, 1, 2, '新疆富士苹果 2.5kg', '节气后采摘 应季冰糖心', 106.00, 94.00, 200, 'n', 'https://imgjd3.fruitday.com/images/product_pic/46/1/1-270x270-46-CUDTC1KY.jpg', 'https://imgjd3.fruitday.com/images/product_pic/46/1/1-270x270-46-CUDTC1KY.jpg,https://imgjd2.fruitday.com/images/product_pic/2169/1/1-270x270-2169-YR8PTW67.jpg', 19, '2018-03-08 12:11:00');
@@ -369,7 +392,12 @@ CREATE TABLE `orderproduct`  (
   `qty` int(11) NULL DEFAULT NULL,
   `date` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Records of orderproduct
+-- ----------------------------
+INSERT INTO `orderproduct` VALUES (1, 2, 1, 1, '2018-03-08 10:22:54');
 
 -- ----------------------------
 -- Table structure for orders
@@ -382,7 +410,13 @@ CREATE TABLE `orders`  (
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `date` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (1, 1, '1', '1', '2018-03-08 10:21:52');
+INSERT INTO `orders` VALUES (2, 2, '2', '2', '2018-03-08 10:22:39');
 
 -- ----------------------------
 -- Table structure for smalltype
@@ -458,6 +492,12 @@ CREATE TABLE `user`  (
   `address1` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `date` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (1, '111', '111', NULL, NULL, NULL, '哈哈哈', NULL, NULL, NULL, '2018-03-05 17:01:46');
+INSERT INTO `user` VALUES (2, '18333333333', '111111', NULL, NULL, NULL, '哇哇', NULL, NULL, NULL, '2018-03-05 17:01:43');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -35,13 +35,24 @@ module.exports = {
             var phone = req.body.phone;
             var username = req.body.username;
             var password = req.body.password;
-            var email = req.body.email;
             var position = req.body.position;
-            let sql = `
-                insert into admin (phone,username,password,email,position) values ('${phone}','${username}','${password}','${email}','${position}')`
-            db.insert(sql,function(data){
-                res.send(data)
+            console.log(phone,username,password,position)
+            let sql = `select * from admin where username = ${username}`;
+            db.select(sql,function(ress){
+
+                if(ress.data.results.length>0){
+                    res.send(ress);
+                }else{
+                    sql = `
+                        insert into admin (phone,username,password,position) values ('${phone}','${username}','${password}','${position}')`
+                    db.insert(sql,function(data){
+                       
+                        res.send(data)
+                    })
+                }
+                
             })
+            
         })
         //修改用户
         app.post('/updatauser',function(req,res){

@@ -24,7 +24,10 @@
     background:#1190d6 !important;
     color:#fff;
 }
-
+.table>tbody>tr>td>img{
+    width:70px;
+    height:70px;
+}
 
 .alltabel{
     height:640px;
@@ -90,6 +93,7 @@
     left:50%;
     height:50px;
     width:400px;
+    z-index:100;
     
     transform:translate(-50%,-50%);
     >p{
